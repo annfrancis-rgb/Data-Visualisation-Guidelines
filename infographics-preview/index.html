@@ -1970,8 +1970,6 @@ svg { flex: none; }
 .pv-card { position: relative; scroll-margin-top: 72px; transition: box-shadow var(--aira-motion-base); }
 .pv-card:focus { outline: none; }
 .pv-card.is-target { box-shadow: var(--aira-shadow-focus); }
-.pv-card .dv-title { font: var(--aira-t-label-lg); }
-.pv-card .dv-sub { font: var(--aira-t-body-sm); }
 
 /* Card actions: on hover with a mouse, in a menu on touch */
 .pv-more { display: none; position: relative; }
@@ -2017,8 +2015,6 @@ svg { flex: none; }
 .pv-tbar-r { display: flex; gap: var(--aira-sp-1); }
 .pv-tbar .iconbtn svg { width: 16px; height: 16px; }
 .pv-rows { font: var(--aira-t-body-sm); color: var(--aira-text-tertiary); }
-.pv-twrap { margin-top: var(--aira-sp-3); overflow-x: auto; border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-md); scrollbar-width: thin; scrollbar-color: var(--aira-border-strong) transparent; }
-.pv-twrap .dv-dt th { background: var(--aira-bg-surface); }
 
 .pv-code { margin: 0; padding: var(--aira-sp-4); background: var(--aira-code-bg); border: 1px solid var(--aira-code-border); border-radius: var(--aira-radius-md); overflow-x: auto; }
 .pv-code code { background: none; padding: 0; font: var(--aira-t-code); color: var(--aira-code-fg); white-space: pre; }
@@ -2052,6 +2048,42 @@ svg { flex: none; }
 .pv-switch button[aria-pressed="true"] { background: var(--aira-bg-surface); color: var(--aira-text-primary); box-shadow: var(--aira-shadow-sm); }
 .pv-switch button[aria-pressed="true"] b { color: var(--aira-text-link); }
 .pv-switch button:hover:not([aria-pressed="true"]):not([aria-selected="true"]) { color: var(--aira-text-primary); }
+.pv-tools { margin-bottom: var(--aira-sp-1); }
+.pv-card .dv-copied:empty { display: none; }
+.dv-foot { margin: 0; }
+.iconbtn.is-copied, .iconbtn.is-copied:hover { color: var(--aira-text-success); }
+/* Tooltip sits above the full-screen chart and its overlay */
+.dv-tip { z-index: 120; }
+.pv-mfoot { margin: var(--aira-sp-3) 0 0; }
+
+/* Result tables: the Artifact-preview format. Flat on the panel (no box), bounded height with a
+   sticky header; header is a #FBFCFD band, 1px default rule, 14px medium primary text. */
+.pv-twrap { margin-top: var(--aira-sp-4); max-height: 560px; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--aira-border-strong) transparent; }
+.dv-dt { font: var(--aira-t-body-sm); }
+.dv-dt th { background: var(--aira-bg-surface-alt); border-bottom: 1px solid var(--aira-border-default); color: var(--aira-text-primary); font: var(--aira-t-label-md); }
+.pv-twrap .dv-dt th { position: sticky; top: 0; z-index: 2; padding: var(--aira-sp-3) var(--aira-sp-5); }
+.pv-twrap .dv-dt td { padding: var(--aira-sp-4) var(--aira-sp-5); }
+
+/* Paginated footer, as on the Artifact-preview page */
+.tfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-4); margin-top: var(--aira-sp-4); padding-top: var(--aira-sp-4); border-top: 1px solid var(--aira-border-subtle); flex-wrap: wrap; }
+.tfoot__right { display: inline-flex; align-items: center; gap: var(--aira-sp-4); flex-wrap: wrap; }
+.pager { display: inline-flex; align-items: center; gap: var(--aira-sp-1); }
+.pager .pg { min-width: 32px; height: 32px; padding: 0 6px; border: 1px solid transparent; background: transparent; color: var(--aira-text-secondary); border-radius: var(--aira-radius-sm); font: var(--aira-t-label-sm); font-size: 13px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.pager .pg:hover { background: var(--aira-bg-muted); color: var(--aira-text-primary); }
+.pager .pg[aria-current="page"] { border-color: var(--aira-border-brand); color: var(--aira-text-link); }
+.pager .ellipsis { min-width: 20px; text-align: center; color: var(--aira-text-tertiary); }
+.pager .nav { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; background: transparent; color: var(--aira-text-secondary); border-radius: var(--aira-radius-sm); cursor: pointer; }
+.pager .nav svg { width: 16px; height: 16px; }
+.pager .nav:hover:not(:disabled) { background: var(--aira-bg-muted); color: var(--aira-text-primary); }
+.pager .nav:disabled { color: var(--aira-text-disabled); cursor: default; }
+.dd { position: relative; }
+.dd__btn { display: inline-flex; align-items: center; gap: var(--aira-sp-2); height: 32px; padding: 0 var(--aira-sp-3); border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-md); background: var(--aira-bg-default); color: var(--aira-text-secondary); font: var(--aira-t-label-sm); font-size: 13px; cursor: pointer; }
+.dd__btn:hover { border-color: var(--aira-border-strong); background: var(--aira-bg-surface-alt); }
+.dd__btn svg { width: 14px; height: 14px; color: var(--aira-text-tertiary); }
+.dd__menu { position: absolute; left: 0; bottom: calc(100% + 6px); min-width: 128px; list-style: none; margin: 0; padding: var(--aira-sp-1); background: var(--aira-bg-default); border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-md); box-shadow: var(--aira-shadow-md); z-index: 30; }
+.dd__menu li { padding: 6px var(--aira-sp-3); border-radius: var(--aira-radius-sm); font: var(--aira-t-body-sm); color: var(--aira-text-secondary); cursor: pointer; }
+.dd__menu li:hover, .dd__menu li:focus-visible { background: var(--aira-bg-muted); outline: none; }
+.dd__menu li[aria-selected="true"] { color: var(--aira-text-link); font-weight: var(--aira-fw-medium); }
 
 .pv-switchbar { flex-wrap: wrap; gap: var(--aira-sp-3); }
 </style>
@@ -2153,11 +2185,13 @@ var C = (function () {
   var MON = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
   var MONY = ['Aug 2025', 'Sep 2025', 'Oct 2025', 'Nov 2025', 'Dec 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'];
 
-  function monthAxis(o, X, y, W) {
-    var every = W < 520 ? 3 : W < 760 ? 2 : 1;
+  function monthAxis(o, X, y) {
+    var gap = X(1) - X(0), every = [1, 2, 3, 4, 6].filter(function (n) { return gap * n >= 60; })[0] || 6, lastYear = '';
     MON.forEach(function (m, i) {
       if (i % every) return;
-      o.push(txt(X(i), y, i === 0 ? 'Aug 2025' : m === 'Jan' ? 'Jan 2026' : m, '', 'middle'));
+      var yr = MONY[i].slice(-4);
+      o.push(txt(X(i), y, yr !== lastYear ? m + ' ' + yr : m, '', 'middle'));
+      lastYear = yr;
     });
   }
 
@@ -2231,25 +2265,36 @@ var C = (function () {
     return { H: H, L: L, R: R, T: T, B: B, pw: W - L - R, ph: H - T - B };
   }
   F.active = function (W, tall) {
-    var f = monthFrame(W, tall), max = 1000000, o = [], slot = f.pw / 12, bw = Math.min(28, slot * 0.6);
-    function Y(v) { return f.T + f.ph - v / max * f.ph; }
-    function X(i) { return f.L + (i + 0.5) * slot; }
-    [0, 250000, 500000, 750000, 1000000].forEach(function (t) { o.push(line(f.L, Y(t), W - f.R, Y(t), t ? GRID : BASE) + txt(f.L - 8, Y(t) + 4, t ? lakh(t).replace('.0L', 'L') : '0', '', 'end')); });
-    monthAxis(o, X, f.H - 6, W);
-    var peak = D.active.indexOf(Math.max.apply(null, D.active));
+    var o = [], peak = D.active.indexOf(Math.max.apply(null, D.active));
+    if (W < 480) {
+      // Too narrow for 12 labelled columns: the same data as horizontal bars.
+      var rowH = 26, lab = 72, valW = 44, aw = W - lab - valW, max = 900000;
+      D.active.forEach(function (v, i) {
+        var y = i * rowH + 4, w = v / max * aw;
+        o.push(hit('<rect class="band" x="0" y="' + (i * rowH) + '" width="' + W + '" height="' + rowH + '"/>' + txt(0, y + 13, MONY[i], 'l2') + barH(lab, y, w, 18, V1) + txt(lab + w + 6, y + 13, lakh(v), i === peak ? 'lp' : 'l2'),
+          tipHTML(MONY[i], [['Active customers', NF.format(v)]]), MONY[i] + ', ' + NF.format(v) + ' active customers'));
+      });
+      o.push(line(lab, 0, lab, 12 * rowH, BASE));
+      return svg(W, 12 * rowH, o.join(''));
+    }
+    var H = tall ? 320 : 220, L = 8, R = 8, T = 24, B = 28, pw = W - L - R, ph = H - T - B, mx = 900000, slot = pw / 12, bw = Math.min(28, slot * 0.6);
+    function Y(v) { return T + ph - v / mx * ph; }
+    function X(i) { return L + (i + 0.5) * slot; }
+    monthAxis(o, X, H - 6);
     D.active.forEach(function (v, i) {
       var y = Y(v);
-      o.push(hit('<rect class="band" x="' + (f.L + i * slot) + '" y="' + f.T + '" width="' + slot + '" height="' + f.ph + '"/>' + barV(X(i) - bw / 2, y, bw, f.T + f.ph - y, V1) + (i === peak ? txt(X(i), y - 6, lakh(v), 'lp', 'middle') : ''),
+      o.push(hit('<rect class="band" x="' + (L + i * slot) + '" y="' + T + '" width="' + slot + '" height="' + ph + '"/>' + barV(X(i) - bw / 2, y, bw, T + ph - y, V1) + txt(X(i), y - 6, lakh(v), i === peak ? 'lp' : 'l2', 'middle'),
         tipHTML(MONY[i], [['Active customers', NF.format(v)]]), MONY[i] + ', ' + NF.format(v) + ' active customers'));
     });
-    return svg(W, f.H, o.join(''));
+    o.push(line(L, T + ph, W - R, T + ph, BASE));
+    return svg(W, H, o.join(''));
   };
   F.revenue = function (W, tall) {
     var f = monthFrame(W, tall), max = 600, o = [], slot = f.pw / 12;
     function Y(v) { return f.T + f.ph - v / max * f.ph; }
     function X(i) { return f.L + (i + 0.5) * slot; }
-    [0, 150, 300, 450, 600].forEach(function (t) { o.push(line(f.L, Y(t), W - f.R, Y(t), t ? GRID : BASE) + txt(f.L - 8, Y(t) + 4, t ? '₹' + t + ' Cr' : '0', '', 'end')); });
-    monthAxis(o, X, f.H - 6, W);
+    [0, 150, 300, 450, 600].forEach(function (t) { o.push(line(f.L, Y(t), W - f.R, Y(t), t ? GRID : BASE) + txt(f.L - 8, Y(t) + 4, t === max ? '₹' + t + ' Cr' : String(t), '', 'end')); });
+    monthAxis(o, X, f.H - 6);
     o.push('<polyline class="mk" fill="none" stroke="' + V1 + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="' + D.revenue.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' ') + '"/>');
     var peak = D.revenue.indexOf(Math.max.apply(null, D.revenue));
     D.revenue.forEach(function (v, i) {
@@ -2264,8 +2309,8 @@ var C = (function () {
     var H = tall ? 340 : 240, L = 44, R = 84, T = 12, B = 28, pw = W - L - R, ph = H - T - B, max = 10, o = [];
     function X(i) { return L + i * pw / 11; }
     function Y(v) { return T + ph - v / max * ph; }
-    [0, 2.5, 5, 7.5, 10].forEach(function (t) { o.push(line(L, Y(t), W - R, Y(t), t ? GRID : BASE) + txt(L - 8, Y(t) + 4, t ? t + 'B' : '0', '', 'end')); });
-    monthAxis(o, X, H - 6, W - R + 40);
+    [0, 2.5, 5, 7.5, 10].forEach(function (t) { o.push(line(L, Y(t), W - R, Y(t), t ? GRID : BASE) + txt(L - 8, Y(t) + 4, t === max ? t + 'B' : String(t), '', 'end')); });
+    monthAxis(o, X, H - 6);
     var S = [['Issued', 'issued', 'var(--aira-viz-1)'], ['Expired', 'expired', 'var(--aira-viz-2)'], ['Redeemed', 'redeemed', 'var(--aira-viz-3)']];
     var ends = S.map(function (s) { return Y(D[s[1]][11]); });
     var order = [0, 1, 2].sort(function (a, b) { return ends[a] - ends[b]; });
@@ -2285,13 +2330,13 @@ var C = (function () {
   F.rate = function (W, tall) {
     var r = D.redeemed.map(function (v, i) { return v / D.issued[i] * 100; });
     var avg = r.reduce(function (a, b) { return a + b; }, 0) / r.length;
-    var H = tall ? 320 : 220, L = 44, R = 84, T = 12, B = 28, pw = W - L - R, ph = H - T - B, max = 12, o = [];
+    var H = tall ? 320 : 220, L = 44, R = 100, T = 12, B = 28, pw = W - L - R, ph = H - T - B, max = 12, o = [];
     function X(i) { return L + i * pw / 11; }
     function Y(v) { return T + ph - v / max * ph; }
-    [0, 4, 8, 12].forEach(function (t) { o.push(line(L, Y(t), W - R, Y(t), t ? GRID : BASE) + txt(L - 8, Y(t) + 4, t + '%', '', 'end')); });
-    monthAxis(o, X, H - 6, W - R + 40);
+    [0, 4, 8, 12].forEach(function (t) { o.push(line(L, Y(t), W - R, Y(t), t ? GRID : BASE) + txt(L - 8, Y(t) + 4, t === max ? t + '%' : String(t), '', 'end')); });
+    monthAxis(o, X, H - 6);
     // Reference line named in the right margin, clear of the data.
-    o.push(line(L, Y(avg), W - R, Y(avg), 'var(--aira-text-tertiary)', 1, '4 3') + txt(W - R + 10, Y(avg) - 2, 'Average', 'lm') + txt(W - R + 10, Y(avg) + 14, t1(avg) + '%'));
+    o.push(line(L, Y(avg), W - R, Y(avg), 'var(--aira-text-tertiary)', 1, '1 3') + txt(W - R + 8, Y(avg) + 4, 'Average ' + t1(avg) + '%', 'l2'));
     o.push('<polyline class="mk" fill="none" stroke="' + V1 + '" stroke-width="2" stroke-linejoin="round" points="' + r.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' ') + '"/>');
     r.forEach(function (v, i) {
       var cw = pw / 11;
@@ -2325,6 +2370,8 @@ var C = (function () {
     alert: '<circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>',
     retry: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
     chevron: '<path d="m6 9 6 6 6-6"/>',
+    prev: '<path d="m15 18-6-6 6-6"/>',
+    next: '<path d="m9 18 6-6-6-6"/>',
     list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'
   };
   function ico(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + I[n] + '</svg>'; }
@@ -2333,25 +2380,26 @@ var C = (function () {
   var M = C.MONY;
   var tierRows = function (vals, f) { return C.TIERS.map(function (t, i) { return [t, f(vals[i])]; }); };
   var b2 = function (v) { return v.toFixed(2); };
+  var SRC = {"outcome": "write_db_100783.points_aira", "burn": "write_db_100783.points_aira", "stage": "write_db_100783.members_aira", "active": "write_db_100783.transactions_aira", "revenue": "write_db_100783.transactions_aira", "flows": "write_db_100783.points_aira", "rate": "write_db_100783.points_aira", "tierIssued": "write_db_100783.points_aira", "tierExpired": "write_db_100783.points_aira", "tierRedeemed": "write_db_100783.points_aira"};
   var RANGE = 'Data from 4 Aug 2025 to 4 Aug 2026 · Run 23 Sep 2026, 10:42 IST';
 
   var ART = {
     a1: {
       title: 'Points and customer activity', range: RANGE,
       charts: [
-        { id: 'outcome', name: 'Points by outcome', scope: 'Points · billions · 12 months', span: 'full',
+        { id: 'outcome', name: 'Points by outcome', scope: 'Points · billions · Aug 2025–Jul 2026', span: 'full',
           sum: 'Bar chart. 31.03 billion points issued, 32.53 billion expired, 1.54 billion redeemed and 0.30 billion returned.',
           table: [['Outcome', 'Points (B)'], D.outcome.map(function (r) { return [r[0], b2(r[1])]; }), [1]] },
-        { id: 'burn', name: 'Burn rate by tier', scope: 'Points redeemed as % of points issued', span: 'half',
+        { id: 'burn', name: 'Burn rate by tier', scope: 'Points redeemed as % of points issued · Aug 2025–Jul 2026', span: 'half',
           sum: 'Column chart. Burn rate is 0.21% for Base, 2.28% Silver, 7.56% Gold and 23.12% Platinum.',
           table: [['Tier', 'Burn rate'], tierRows(D.burn, function (v) { return v.toFixed(2) + '%'; }), [1]] },
         { id: 'stage', name: 'Members by lifecycle stage', scope: 'Share of 62.8L transacting members · by days since last purchase', span: 'half',
           sum: 'Bar chart. Of 62.8 lakh transacting members, 23.0% are active, 16.8% lapsing, 18.7% dormant and 41.5% churned.',
           table: [['Stage', 'Days since last purchase', 'Members', 'Share'], D.stage.map(function (r) { return [r[0], r[1], NF.format(r[2]), C.t1(r[2] / C.MEMBERS * 100) + '%']; }), [2, 3]] },
-        { id: 'active', name: 'Active customers by month', scope: 'Customers with at least one purchase in the month', span: 'full',
+        { id: 'active', name: 'Active customers by month', scope: 'Customers with a purchase in the month · Aug 2025–Jul 2026', span: 'full',
           sum: 'Column chart. Active customers stayed between 4.7 and 7.0 lakh a month, except March 2026 at 8.8 lakh.',
           table: [['Month', 'Active customers'], D.active.map(function (v, i) { return [M[i], NF.format(v)]; }), [1]] },
-        { id: 'revenue', name: 'Revenue by month', scope: '₹ crore · same months as active customers', span: 'full',
+        { id: 'revenue', name: 'Revenue by month', scope: '₹ crore · Aug 2025–Jul 2026', span: 'full',
           sum: 'Line chart. Monthly revenue ranged from ₹208.1 crore to ₹533.1 crore, peaking in March 2026.',
           table: [['Month', 'Revenue (₹ Cr)'], D.revenue.map(function (v, i) { return [M[i], v.toFixed(1)]; }), [1]] }
       ],
@@ -2360,17 +2408,17 @@ var C = (function () {
     a2: {
       title: 'Points flows by month', range: RANGE,
       charts: [
-        { id: 'flows', name: 'Points issued, expired and redeemed', scope: 'Points · billions · per month', span: 'full',
+        { id: 'flows', name: 'Points issued, expired and redeemed', scope: 'Points · billions · per month · Aug 2025–Jul 2026', span: 'full',
           sum: 'Line chart. Points expired exceeded points issued in 5 of 12 months, peaking at 8.68 billion in September 2025. Points redeemed stayed between 0.08 and 0.32 billion every month.',
           table: [['Month', 'Issued (B)', 'Expired (B)', 'Redeemed (B)'], M.map(function (m, i) { return [m, b2(D.issued[i]), b2(D.expired[i]), b2(D.redeemed[i])]; }), [1, 2, 3]] },
-        { id: 'rate', name: 'Redemption rate by month', scope: 'Points redeemed as % of points issued', span: 'full',
+        { id: 'rate', name: 'Redemption rate by month', scope: 'Points redeemed as % of points issued · per month', span: 'full',
           sum: 'Line chart. Redemption rate ranged from 2.5% to 10.0% a month, averaging 6.6%.',
           table: [['Month', 'Redemption rate'], M.map(function (m, i) { return [m, C.t1(D.redeemed[i] / D.issued[i] * 100) + '%']; }), [1]] }
       ],
       tables: [
-        { id: 'tm', name: 'Points by month', rows: 'Total 12 rows',
+        { id: 'tm', name: 'Points by month', total: 12,
           t: [['Month', 'Issued (B)', 'Expired (B)', 'Redeemed (B)'], M.map(function (m, i) { return [m, b2(D.issued[i]), b2(D.expired[i]), b2(D.redeemed[i])]; }), [1, 2, 3]] },
-        { id: 'tp', name: 'Points by member', rows: 'Total 62,76,905 rows · showing the first 8',
+        { id: 'tp', name: 'Points by member', total: 6276905, gen: true,
           t: [['Member ID', 'Tier', 'Points issued', 'Points redeemed', 'Last transaction'], [
             ['M-104233', 'Gold', '12,400', '1,850', '18 Sep 2026'], ['M-221907', 'Base', '860', '0', '2 Mar 2026'], ['M-310554', 'Platinum', '48,200', '11,300', '21 Sep 2026'],
             ['M-118320', 'Silver', '3,150', '120', '30 Jul 2026'], ['M-502871', 'Base', '420', '0', '11 Dec 2025'], ['M-277610', 'Gold', '9,870', '640', '26 Aug 2026'],
@@ -2381,7 +2429,7 @@ var C = (function () {
     a3: {
       title: 'Burn rate by tier', range: RANGE,
       charts: [
-        { id: 'burn', name: 'Burn rate by tier', scope: 'Points redeemed as % of points issued', span: 'full',
+        { id: 'burn', name: 'Burn rate by tier', scope: 'Points redeemed as % of points issued · Aug 2025–Jul 2026', span: 'full',
           sum: 'Column chart. Burn rate is 0.21% for Base, 2.28% Silver, 7.56% Gold and 23.12% Platinum.',
           table: [['Tier', 'Burn rate'], tierRows(D.burn, function (v) { return v.toFixed(2) + '%'; }), [1]] }
       ],
@@ -2390,13 +2438,13 @@ var C = (function () {
     a4: {
       title: 'Points by tier', range: RANGE, run: true,
       charts: [
-        { id: 'tierIssued', name: 'Points issued by tier', scope: 'Points · billions · 12 months', span: 'full',
+        { id: 'tierIssued', name: 'Points issued by tier', scope: 'Points · billions · Aug 2025–Jul 2026', span: 'full',
           sum: 'Column chart. Base members were issued 12.83 billion points, Silver 8.90, Gold 5.40 and Platinum 3.90.',
           table: [['Tier', 'Points issued (B)'], tierRows(D.tierIssued, b2), [1]] },
-        { id: 'tierExpired', name: 'Points expired by tier', scope: 'Points · billions · 12 months', span: 'half',
+        { id: 'tierExpired', name: 'Points expired by tier', scope: 'Points · billions · Aug 2025–Jul 2026', span: 'half',
           sum: 'Column chart. 16.90 billion Base points expired, 9.40 Silver, 4.30 Gold and 1.93 Platinum.',
           table: [['Tier', 'Points expired (B)'], tierRows(D.tierExpired, b2), [1]] },
-        { id: 'tierRedeemed', name: 'Points redeemed by tier', scope: 'Points · billions · 12 months', span: 'half', failFirst: true,
+        { id: 'tierRedeemed', name: 'Points redeemed by tier', scope: 'Points · billions · Aug 2025–Jul 2026', span: 'half', failFirst: true,
           sum: 'Column chart. Base members redeemed 0.03 billion points, Silver 0.20, Gold 0.41 and Platinum 0.90.',
           table: [['Tier', 'Points redeemed (B)'], tierRows(D.tierRedeemed, b2), [1]] }
       ],
@@ -2481,6 +2529,91 @@ var C = (function () {
   });
   document.addEventListener('focusout', function (e) { if (e.target.hasAttribute && e.target.hasAttribute('data-chart')) hide(); });
 
+  // ── result tables: Artifact-preview format (Total N rows, 10 / page, pager) ──
+  var TBLS = {};
+  ART.a2.tables.forEach(function (t) { TBLS[t.id] = t; });
+  var MONS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function rnd(i, k) { var x = Math.sin(i * 9301 + k * 49297) * 233280; return x - Math.floor(x); }
+  function genMember(i) {
+    var given = TBLS.tp.t[1]; if (i < given.length) return given[i];
+    var tier = rnd(i, 2) < 0.55 ? 'Base' : rnd(i, 2) < 0.8 ? 'Silver' : rnd(i, 2) < 0.94 ? 'Gold' : 'Platinum';
+    var burn = { Base: 0.002, Silver: 0.023, Gold: 0.076, Platinum: 0.23 }[tier];
+    var iss = Math.round(rnd(i, 3) * 5000) * 10, red = Math.round(iss * burn * rnd(i, 4) * 2 / 10) * 10;
+    var d = new Date(Date.UTC(2025, 7, 4) + Math.floor(rnd(i, 5) * 396) * 864e5);
+    return ['M-' + (100000 + Math.floor(rnd(i, 1) * 899999)), tier, NF.format(iss), NF.format(red), d.getUTCDate() + ' ' + MONS[d.getUTCMonth()] + ' ' + d.getUTCFullYear()];
+  }
+  function pageRows(t, page, per) {
+    var s = (page - 1) * per, e = Math.min(s + per, t.total), out = [];
+    for (var i = s; i < e; i++) out.push(t.gen ? genMember(i) : t.t[1][i]);
+    return out;
+  }
+  function pageT(t, page, per) { return [t.t[0], pageRows(t, page, per), t.t[2]]; }
+  function rowsHTML(t, rows) { var nums = t.t[2]; return rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + (nums.indexOf(i) > -1 ? ' class="n"' : '') + '>' + esc(c) + '</td>'; }).join('') + '</tr>'; }).join(''); }
+  function countHTML(t) { return 'Total ' + NF.format(t.total) + (t.total === 1 ? ' row' : ' rows'); }
+  function pagerHTML(page, pages, compact) {
+    var n = compact ? 1 : 2, set = {}, list = [], i;
+    if (pages <= 7) for (i = 1; i <= pages; i++) set[i] = 1;
+    else {
+      set[1] = set[pages] = 1;
+      var lo = Math.max(2, page - n), hi = Math.min(pages - 1, page + n);
+      if (page <= n + 2) hi = Math.max(hi, n * 2 + 2); if (page >= pages - n - 1) lo = Math.min(lo, pages - n * 2 - 1);
+      for (i = lo; i <= hi; i++) set[i] = 1;
+    }
+    Object.keys(set).map(Number).sort(function (x, y) { return x - y; }).forEach(function (p, k, arr) {
+      if (k && p - arr[k - 1] > 1) list.push('<span class="ellipsis" aria-hidden="true">…</span>');
+      list.push('<button class="pg" type="button" data-pg="' + p + '"' + (p === page ? ' aria-current="page"' : '') + ' aria-label="Page ' + NF.format(p) + '">' + NF.format(p) + '</button>');
+    });
+    return '<button class="nav" type="button" data-nav="-1" aria-label="Previous page"' + (page === 1 ? ' disabled' : '') + '>' + ico('prev') + '</button>' + list.join('') +
+      '<button class="nav" type="button" data-nav="1" aria-label="Next page"' + (page === pages ? ' disabled' : '') + '>' + ico('next') + '</button>';
+  }
+  function tfootHTML(t, page, per, compact) {
+    if (t.total <= 10) return '';
+    var pages = Math.ceil(t.total / per);
+    return '<div class="tfoot"><div class="dd"><button class="dd__btn" type="button" data-dd aria-haspopup="listbox" aria-expanded="false">' + per + ' / page' + ico('chevron') + '</button>' +
+      '<ul class="dd__menu" role="listbox" hidden>' + [10, 20, 50, 100].map(function (v) { return '<li role="option" data-per="' + v + '" aria-selected="' + (v === per) + '" tabindex="-1">' + v + ' / page</li>'; }).join('') + '</ul></div>' +
+      '<div class="tfoot__right"><div class="pager" role="navigation" aria-label="Pagination">' + pagerHTML(page, pages, compact) + '</div></div></div>';
+  }
+  function setPage(panel, page, per) {
+    var t = TBLS[panel.getAttribute('data-tid')], pages = Math.ceil(t.total / per);
+    page = Math.max(1, Math.min(pages, page));
+    panel.setAttribute('data-page', page); panel.setAttribute('data-per', per);
+    $('tbody', panel).innerHTML = rowsHTML(t, pageRows(t, page, per));
+    var f = $('.tfoot', panel), tmp = document.createElement('div');
+    tmp.innerHTML = tfootHTML(t, page, per, !!panel.closest('.m-frame'));
+    if (f) f.replaceWith(tmp.firstChild);
+    $('.pv-twrap', panel).scrollTop = 0;
+  }
+  function closeDD(except) { $$('.dd__menu').forEach(function (m) { if (m !== except) { m.hidden = true; m.previousElementSibling.setAttribute('aria-expanded', 'false'); } }); }
+  document.addEventListener('click', function (e) {
+    var t = e.target, panel = t.closest && t.closest('.pv-tpanel');
+    if (!(t.closest && t.closest('.dd'))) closeDD();
+    if (!panel) return;
+    var page = +panel.getAttribute('data-page'), per = +panel.getAttribute('data-per');
+    var pg = t.closest('[data-pg]'); if (pg) { setPage(panel, +pg.getAttribute('data-pg'), per); $('[aria-current="page"]', panel).focus(); return; }
+    var nv = t.closest('[data-nav]'); if (nv) { setPage(panel, page + +nv.getAttribute('data-nav'), per); var again = $('[data-nav="' + nv.getAttribute('data-nav') + '"]', panel); if (again && !again.disabled) again.focus(); return; }
+    var dd = t.closest('[data-dd]'); if (dd) { var m = dd.nextElementSibling, open = m.hidden; closeDD(m); m.hidden = !open; dd.setAttribute('aria-expanded', String(open)); if (open) $('[aria-selected="true"]', m).focus(); return; }
+    var li = t.closest('li[data-per]'); if (li) { setPage(panel, 1, +li.getAttribute('data-per')); $('[data-dd]', panel).focus(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    var li = e.target.closest && e.target.closest('li[data-per]'); if (!li) return;
+    var items = $$('li', li.parentNode), i = items.indexOf(li);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { items[(i + (e.key === 'ArrowDown' ? 1 : items.length - 1)) % items.length].focus(); e.preventDefault(); }
+    if (e.key === 'Enter' || e.key === ' ') { li.click(); e.preventDefault(); }
+    if (e.key === 'Escape') { closeDD(); $('[data-dd]', li.closest('.dd')).focus(); }
+  });
+  // Copy feedback: the button's icon becomes a tick for 1.5s, then reverts. No text note.
+  I.check = '<path d="M20 6 9 17l-5-5"/>';
+  function copyWith(btn, text, onFail) {
+    function ok() {
+      if (!btn) return;
+      if (!btn._icon) btn._icon = btn.innerHTML;
+      clearTimeout(btn._t);
+      btn.innerHTML = ico('check'); btn.classList.add('is-copied');
+      live.textContent = 'Copied';
+      btn._t = setTimeout(function () { btn.innerHTML = btn._icon; btn._icon = null; btn.classList.remove('is-copied'); }, 1500);
+    }
+    try { navigator.clipboard.writeText(text).then(ok, onFail); } catch (err) { onFail(); }
+  }
   var PW = (function () {
   // ── building blocks ────────────────────────────────────────
   function tbl(t) {
@@ -2499,7 +2632,7 @@ var C = (function () {
       '<div class="pv-more"><button class="iconbtn sm" type="button" data-act="more" aria-haspopup="menu" aria-expanded="false" aria-label="Chart actions">' + ico('more') + '</button></div>' : '';
     return '<figure class="dv-card pv-card pv-' + c.span + '" id="card-' + u + '" data-id="' + c.id + '" tabindex="-1" data-state="' + state + '">' +
       '<div class="dv-head"><div><div class="dv-title" id="t-' + u + '">' + esc(c.name) + '</div><div class="dv-sub">' + esc(c.scope) + '</div></div>' + acts + '</div>' +
-      body + '<span class="dv-copied" role="status"></span></figure>';
+      body + (state === 'ready' ? '<p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p>' : '') + '</figure>';
   }
   var EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
   var CODE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 8-4 4 4 4M15 8l4 4-4 4"/></svg>';
@@ -2530,14 +2663,14 @@ var C = (function () {
     return '<div class="pv-tables"><div class="pv-tabs" role="tablist" aria-label="Result tables">' +
       a.tables.map(function (t, i) { return '<button class="pv-tab" role="tab" id="tab-' + k + t.id + '" aria-controls="tp-' + k + t.id + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : '') + '>' + esc(t.name) + '</button>'; }).join('') + '</div>' +
       a.tables.map(function (t, i) {
-        return '<div class="pv-tpanel" role="tabpanel" id="tp-' + k + t.id + '" aria-labelledby="tab-' + k + t.id + '"' + (i ? ' hidden' : '') + '><div class="pv-tbar"><span class="pv-rows">' + esc(t.rows) + '</span><div class="pv-tbar-r">' +
-          '<button class="btn tertiary sm pv-csv" type="button" data-act="download" aria-label="Download ' + esc(t.name) + ' as CSV" title="Download CSV">' + ico('download') + 'CSV</button><button class="iconbtn sm" type="button" data-act="copy-table" aria-label="Copy ' + esc(t.name) + '" title="Copy">' + ico('copy') + '</button></div></div><div class="pv-twrap">' + tbl(t.t) + '</div></div>';
+        return '<div class="pv-tpanel" data-tid="' + t.id + '" data-page="1" data-per="10" role="tabpanel" id="tp-' + k + t.id + '" aria-labelledby="tab-' + k + t.id + '"' + (i ? ' hidden' : '') + '><div class="pv-tbar"><span class="pv-rows">' + countHTML(t) + '</span><div class="pv-tbar-r">' +
+          '<button class="btn tertiary sm pv-csv" type="button" data-act="download" aria-label="Download ' + esc(t.name) + ' as CSV" title="Download CSV">' + ico('download') + 'CSV</button><button class="iconbtn sm" type="button" data-act="copy-table" aria-label="Copy ' + esc(t.name) + '" title="Copy">' + ico('copy') + '</button><button class="btn secondary sm" type="button" data-act="ftp">Export to FTP</button></div></div><div class="pv-twrap">' + tbl(pageT(t, 1, 10)) + '</div>' + tfootHTML(t, 1, 10, false) + '</div>';
       }).join('') + '</div>';
   };
   Panel.prototype.draw = function () {
     var self = this, a = this.a, html = this.toolbar();
     if (this.view === 'code') html += '<pre class="pv-code"><code>' + esc(a.code) + '</code></pre>';
-    else html += '<p class="pv-range">' + esc(a.range) + '</p><div class="pv-grid">' + a.charts.map(function (c) { return cardHTML(self, c, self.stateOf(c)); }).join('') + '</div>' + this.tables();
+    else html += '<div class="pv-grid">' + a.charts.map(function (c) { return cardHTML(self, c, self.stateOf(c)); }).join('') + '</div>' + this.tables();
     this.body.innerHTML = html; this.body.scrollTop = 0; mount(this.body);
   };
   Panel.prototype.replace = function (c) {
@@ -2592,19 +2725,14 @@ var C = (function () {
   function openModal(c) {
     lastFocus = document.activeElement;
     $('#pv-mt').textContent = c.name; $('#pv-ms').textContent = c.scope;
-    $('#pv-mplot').innerHTML = '<div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div>';
+    $('#pv-mplot').innerHTML = '<div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div><p class="dv-foot pv-mfoot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p>';
     modal.hidden = false; mount(modal); $('#pv-mclose').focus();
   }
   function closeModal() { modal.hidden = true; $('#pv-mplot').innerHTML = ''; hide(); if (lastFocus) lastFocus.focus(); }
   $('#pv-mclose').addEventListener('click', closeModal);
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
-  function copyText(text, card) {
-    var note = card && $('.dv-copied', card);
-    function done(m) { if (note) { note.textContent = m; setTimeout(function () { note.textContent = ''; }, 2000); } else toast(m); }
-    try { navigator.clipboard.writeText(text).then(function () { done('Copied as a table'); }, function () { done('Copy isn’t available here. Select the table instead.'); }); }
-    catch (err) { done('Copy isn’t available here. Select the table instead.'); }
-  }
+  function copyText(text, btn) { copyWith(btn, text, function () { toast('Copy isn’t available here. Select the table instead.'); }); }
   function tsv(table) { return Array.prototype.map.call(table.rows, function (r) { return Array.prototype.map.call(r.cells, function (c) { return c.textContent.trim(); }).join('\t'); }).join('\n'); }
   var NOTDL = 'Downloads aren’t connected in this prototype.';
   function cardAct(p, act, card, btn) {
@@ -2618,7 +2746,7 @@ var C = (function () {
       b.innerHTML = ico(on ? 'chart' : 'table');
       card.classList.toggle('is-table', on);
       if (!on) { plot._m.force = true; render(plot._m); }
-    } else if (act === 'copy') copyText(tsv($('.dv-table table', card)), card);
+    } else if (act === 'copy') copyText(tsv($('.dv-table table', card)), (btn && btn.getAttribute('data-act') === 'copy') ? btn : $('[data-act="more"]', card) || $('[data-act="copy"]', card));
     else if (act === 'download') toast(NOTDL);
     else if (act === 'expand') openModal(c);
     else if (act === 'retry') {
@@ -2659,7 +2787,8 @@ var C = (function () {
     if (act === 'close') { toast('In aiRA this closes the panel and goes back to the chat.'); return; }
     if (act === 'jump') { var menu = ab.nextElementSibling, open = menu.hidden; closeMenus(menu); menu.hidden = !open; ab.setAttribute('aria-expanded', String(open)); if (open) $('[role="menuitem"]', menu).focus(); return; }
     if (act === 'download-all') { toast(NOTDL); return; }
-    if (act === 'copy-table') { copyText(tsv($('table', ab.closest('.pv-tpanel')))); return; }
+    if (act === 'ftp') { toast('Exports aren’t connected in this prototype.'); return; }
+    if (act === 'copy-table') { copyText(tsv($('table', ab.closest('.pv-tpanel'))), ab); return; }
     if (ab.closest('.pv-tpanel')) { toast(NOTDL); return; }
     cardAct(p, act, ab.closest('.pv-card'), ab);
   });
