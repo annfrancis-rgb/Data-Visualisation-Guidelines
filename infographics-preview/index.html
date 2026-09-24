@@ -2000,6 +2000,11 @@ body { background: var(--aira-bg-canvas); }
 .pp-seg span.on { background: var(--aira-bg-surface); color: var(--aira-text-primary); box-shadow: var(--aira-shadow-sm); }
 @media (max-width: 640px) { .pp-body { padding: 0 var(--aira-sp-4) var(--aira-sp-4); } .pp-head { padding: var(--aira-sp-3) var(--aira-sp-4); } }
 
+.dv-full-acts { display: flex; align-items: center; gap: var(--aira-sp-2); }
+.dv-full-acts .dv-actions { opacity: 1 !important; }
+.dv-full-sep { width: 1px; height: 24px; background: var(--aira-border-default); }
+.dv-full-table { max-height: 60vh; overflow: auto; }
+
 :root, :root[data-theme] { color-scheme: light; }
 .pv-card { margin: 0; }
 /* Editor preview panels only, at the size the editor opens at. Every value is an --aira-* token. */
@@ -2243,7 +2248,8 @@ svg { flex: none; }
 .m-frame .pager .pg::after, .m-frame .pager .nav::after, .m-frame .dd__btn::after { content: ""; position: absolute; inset: -6px; }
 .m-frame .tfoot { gap: var(--aira-sp-3); }
 
-.m-fullhead { justify-content: space-between; }
+.m-fullhead { justify-content: flex-end; gap: var(--aira-sp-2); }
+.m-vsep { width: 1px; height: 24px; background: var(--aira-border-default); }
 .m-full.is-table .m-fullhint { display: none; }
 .m-full .pv-twrap { margin-top: 0; }
 .m-fullnote { display: none; margin-top: 0; }
@@ -2296,7 +2302,7 @@ svg { flex: none; }
 </section><section class="m-frame" data-art="a1" id="mobile-a" hidden>
   <div class="m-screen">
     <div class="m-status" aria-hidden="true"></div>
-    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-head"><span></span><h1 class="m-title"></h1><div class="m-head-r"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
     <div class="m-body"></div>
   </div>
   <div class="m-toast" role="status" hidden></div>
@@ -2304,7 +2310,7 @@ svg { flex: none; }
 <section class="m-frame" data-art="a2" id="mobile-b" hidden>
   <div class="m-screen">
     <div class="m-status" aria-hidden="true"></div>
-    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-head"><span></span><h1 class="m-title"></h1><div class="m-head-r"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
     <div class="m-body"></div>
   </div>
   <div class="m-toast" role="status" hidden></div>
@@ -2312,7 +2318,7 @@ svg { flex: none; }
 <section class="m-frame" data-art="a3" id="mobile-c" hidden>
   <div class="m-screen">
     <div class="m-status" aria-hidden="true"></div>
-    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-head"><span></span><h1 class="m-title"></h1><div class="m-head-r"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
     <div class="m-body"></div>
   </div>
   <div class="m-toast" role="status" hidden></div>
@@ -2320,7 +2326,7 @@ svg { flex: none; }
 <section class="m-frame" data-art="a4" id="mobile-d" hidden>
   <div class="m-screen">
     <div class="m-status" aria-hidden="true"></div>
-    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-head"><span></span><h1 class="m-title"></h1><div class="m-head-r"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
     <div class="m-body"></div>
   </div>
   <div class="m-toast" role="status" hidden></div>
@@ -3111,8 +3117,9 @@ var C = (function () {
     lastFocus = document.activeElement;
     var f = document.createElement('div'); f.className = 'm-full pv-dialog'; f.setAttribute('role', 'dialog'); f.setAttribute('aria-modal', 'true'); f.setAttribute('aria-label', c.name); f.setAttribute('data-id', c.id);
     var wide = c.table[0].length > 3;
-    f.innerHTML = '<div class="m-fullhead"><button class="iconbtn" type="button" data-act="full-close" aria-label="Close full screen">' + ico('close') + '</button>' +
-      '<button class="iconbtn m-more" type="button" data-act="more" aria-haspopup="dialog" aria-label="Actions for ' + esc(c.name) + '">' + ico('more') + '</button></div>' +
+    f.innerHTML = '<div class="m-fullhead">' +
+      '<button class="iconbtn m-more" type="button" data-act="more" aria-haspopup="dialog" aria-label="Actions for ' + esc(c.name) + '">' + ico('more') + '</button><span class="m-vsep" aria-hidden="true"></span>' +
+      '<button class="iconbtn" type="button" data-act="full-close" aria-label="Close full screen">' + ico('close') + '</button></div>' +
       '<div class="m-fullbody"><div><h2 class="m-fulltitle">' + esc(c.name) + '</h2><p class="dv-sub">' + esc(c.scope) + '</p></div><div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div>' +
       '<div class="dv-table pv-twrap" hidden>' + tbl(c.table, wide) + '</div>' + (wide ? '<p class="m-note m-fullnote">' + ico('swipe') + 'Swipe sideways for the other ' + (c.table[0].length - 2) + ' columns. The first column stays put.</p>' : '') + '<p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p><p class="m-hint m-fullhint">' + ico('hold') + 'Touch and hold to read exact values.</p></div>';
     p.screen.appendChild(f); mount(f); $('[data-act="full-close"]', f).focus();
