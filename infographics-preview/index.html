@@ -2161,6 +2161,12 @@ svg { flex: none; }
 .dd__menu li:hover, .dd__menu li:focus-visible { background: var(--aira-bg-muted); outline: none; }
 .dd__menu li[aria-selected="true"] { color: var(--aira-text-link); font-weight: var(--aira-fw-medium); }
 
+/* Full screen keeps the card's actions */
+.pv-mhead-r { display: flex; align-items: center; gap: var(--aira-sp-2); }
+.pv-macts .iconbtn svg, .pv-macts .btn svg { width: 16px; height: 16px; }
+.pv-macts .iconbtn.is-on { color: var(--aira-text-link); background: var(--aira-bg-selected); }
+.pv-mtable { max-height: 60vh; overflow: auto; }
+
 /* Mobile editor preview (browser on iOS and Android). Every value is an --aira-* token. */
 .m-frame { width: 375px; max-width: 100%; }
 .m-screen { position: relative; height: min(812px, calc(100vh - 120px)); min-height: 600px; display: flex; flex-direction: column; overflow: hidden; background: var(--aira-bg-surface); border: 1px solid var(--aira-border-default); box-shadow: var(--aira-shadow-sm); }
@@ -2236,6 +2242,12 @@ svg { flex: none; }
 .m-frame .pager .pg, .m-frame .pager .nav { position: relative; }
 .m-frame .pager .pg::after, .m-frame .pager .nav::after, .m-frame .dd__btn::after { content: ""; position: absolute; inset: -6px; }
 .m-frame .tfoot { gap: var(--aira-sp-3); }
+
+.m-fullhead { justify-content: space-between; }
+.m-full.is-table .m-fullhint { display: none; }
+.m-full .pv-twrap { margin-top: 0; }
+.m-fullnote { display: none; margin-top: 0; }
+.m-full.is-table .m-fullnote { display: flex; }
 
 .pv-switchbar { flex-wrap: wrap; gap: var(--aira-sp-3); }
 </style>
@@ -2315,7 +2327,7 @@ svg { flex: none; }
 </section></main>
 <div class="pv-modal" id="pv-modal" hidden>
   <div class="pv-dialog" role="dialog" aria-modal="true" aria-labelledby="pv-mt">
-    <div class="pv-mhead"><div><h2 class="pv-mtitle" id="pv-mt"></h2><p class="pv-msub" id="pv-ms"></p></div><button class="iconbtn" type="button" id="pv-mclose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="pv-mhead"><div><h2 class="pv-mtitle" id="pv-mt"></h2><p class="pv-msub" id="pv-ms"></p></div><div class="pv-mhead-r"><div class="dv-actions pv-macts" id="pv-macts"></div><span class="pv-vsep" aria-hidden="true"></span><button class="iconbtn" type="button" id="pv-mclose" aria-label="Close full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
     <div id="pv-mplot"></div>
   </div>
 </div>
@@ -2906,14 +2918,32 @@ var C = (function () {
 
   // ── expand dialog ──────────────────────────────────────────
   var modal = $('#pv-modal'), lastFocus = null;
+  var mCard = null;
   function openModal(c) {
     lastFocus = document.activeElement;
     $('#pv-mt').textContent = c.name; $('#pv-ms').textContent = c.scope;
-    $('#pv-mplot').innerHTML = '<div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div><p class="dv-foot pv-mfoot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p>';
+    $('#pv-macts').innerHTML = actBtn('table', 'View as table') + actBtn('copy', 'Copy data') +
+      '<button class="btn tertiary sm pv-csv" type="button" data-act="download" aria-label="Download CSV" title="Download CSV">' + ico('download') + 'CSV</button>';
+    $('#pv-mplot').innerHTML = '<div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div><div class="dv-table pv-mtable" hidden>' + tbl(c.table) + '</div><p class="dv-foot pv-mfoot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p>';
+    mCard = $('.pv-dialog', modal);
     modal.hidden = false; mount(modal); $('#pv-mclose').focus();
   }
-  function closeModal() { modal.hidden = true; $('#pv-mplot').innerHTML = ''; hide(); if (lastFocus) lastFocus.focus(); }
+  function closeModal() { modal.hidden = true; $('#pv-mplot').innerHTML = ''; $('#pv-macts').innerHTML = ''; mCard && mCard.classList.remove('is-table'); hide(); if (lastFocus) lastFocus.focus(); }
   $('#pv-mclose').addEventListener('click', closeModal);
+  // Full screen keeps the card's actions: view as table, copy, CSV.
+  $('#pv-macts').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'table') {
+      var plot = $('#pv-mplot .dv-plot'), t = $('#pv-mplot .dv-table'), on = t.hidden;
+      t.hidden = !on; plot.hidden = on; mCard.classList.toggle('is-table', on);
+      b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on));
+      b.setAttribute('aria-label', on ? 'View as chart' : 'View as table'); b.title = b.getAttribute('aria-label');
+      b.innerHTML = ico(on ? 'chart' : 'table');
+      if (!on) { plot._m.force = true; render(plot._m); }
+    } else if (act === 'copy') copyText(tsv($('#pv-mplot .dv-table table')), b);
+    else if (act === 'download') toast('Downloads aren’t connected in this prototype.');
+  });
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
   function copyText(text, btn) { copyWith(btn, text, function () { toast('Copy isn’t available here. Select the table instead.'); }); }
@@ -3079,9 +3109,12 @@ var C = (function () {
   function closeSheet(p) { var s = $('.m-scrim', p.screen); if (s) { s.remove(); if (lastFocus && lastFocus.isConnected) lastFocus.focus(); } }
   function openFull(p, c) {
     lastFocus = document.activeElement;
-    var f = document.createElement('div'); f.className = 'm-full pv-dialog'; f.setAttribute('role', 'dialog'); f.setAttribute('aria-modal', 'true'); f.setAttribute('aria-label', c.name);
-    f.innerHTML = '<div class="m-fullhead"><button class="iconbtn" type="button" data-act="full-close" aria-label="Close full screen">' + ico('close') + '</button></div>' +
-      '<div class="m-fullbody"><div><h2 class="m-fulltitle">' + esc(c.name) + '</h2><p class="dv-sub">' + esc(c.scope) + '</p></div><div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div><p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p><p class="m-hint">' + ico('hold') + 'Touch and hold to read exact values.</p></div>';
+    var f = document.createElement('div'); f.className = 'm-full pv-dialog'; f.setAttribute('role', 'dialog'); f.setAttribute('aria-modal', 'true'); f.setAttribute('aria-label', c.name); f.setAttribute('data-id', c.id);
+    var wide = c.table[0].length > 3;
+    f.innerHTML = '<div class="m-fullhead"><button class="iconbtn" type="button" data-act="full-close" aria-label="Close full screen">' + ico('close') + '</button>' +
+      '<button class="iconbtn m-more" type="button" data-act="more" aria-haspopup="dialog" aria-label="Actions for ' + esc(c.name) + '">' + ico('more') + '</button></div>' +
+      '<div class="m-fullbody"><div><h2 class="m-fulltitle">' + esc(c.name) + '</h2><p class="dv-sub">' + esc(c.scope) + '</p></div><div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div>' +
+      '<div class="dv-table pv-twrap" hidden>' + tbl(c.table, wide) + '</div>' + (wide ? '<p class="m-note m-fullnote">' + ico('swipe') + 'Swipe sideways for the other ' + (c.table[0].length - 2) + ' columns. The first column stays put.</p>' : '') + '<p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p><p class="m-hint m-fullhint">' + ico('hold') + 'Touch and hold to read exact values.</p></div>';
     p.screen.appendChild(f); mount(f); $('[data-act="full-close"]', f).focus();
   }
   function toast(p, msg) {
@@ -3134,10 +3167,11 @@ var C = (function () {
     if (act === 'charts') { sheet(p, 'Charts', p.a.charts.map(function (c) { return ['go:' + c.id, c.name]; })); return; }
     if (act === 'download-all' || act === 'download') { toast(p, NOTDL); return; }
     if (act === 'copy-table') { copyText(p, tsv($('table', ab.closest('.pv-tpanel'))), ab); return; }
-    var cardEl = ab.closest('.pv-card');
+    var cardEl = ab.closest('.m-full') || ab.closest('.pv-card');
     if (act === 'more') {
       var isT = cardEl.classList.contains('is-table');
-      var s2 = sheet(p, p.chart(cardEl.getAttribute('data-id')).name, [['table', isT ? 'View as chart' : 'View as table', isT ? 'chart' : 'table'], ['copy', 'Copy data', 'copy'], ['download', 'Download CSV', 'download']]);
+      var inFull = cardEl.classList.contains('m-full');
+      var s2 = sheet(p, p.chart(cardEl.getAttribute('data-id')).name, [['table', isT ? 'View as chart' : 'View as table', isT ? 'chart' : 'table'], ['copy', 'Copy data', 'copy'], ['download', 'Download CSV', 'download']].concat(inFull ? [] : [['expand', 'Open full screen', 'expand']]));
       s2._card = cardEl; return;
     }
     if (act === 'retry') {
