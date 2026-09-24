@@ -2004,6 +2004,10 @@ body { background: var(--aira-bg-canvas); }
 .dv-full-acts .dv-actions { opacity: 1 !important; }
 .dv-full-sep { width: 1px; height: 24px; background: var(--aira-border-default); }
 .dv-full-table { max-height: 60vh; overflow: auto; }
+/* Optical spacing in toolbars: equal visible gaps (18px) between CSV text, copy glyph and the Export button edge */
+.rt-tools { gap: var(--aira-sp-1); }
+.rt-tools .btn.secondary { margin-inline-start: var(--aira-sp-2); }
+.btn.dv-csv, .btn.sm.dv-csv { padding-inline: var(--aira-sp-2); }
 
 :root, :root[data-theme] { color-scheme: light; }
 .pv-card { margin: 0; }
@@ -2171,6 +2175,11 @@ svg { flex: none; }
 .pv-macts .iconbtn svg, .pv-macts .btn svg { width: 16px; height: 16px; }
 .pv-macts .iconbtn.is-on { color: var(--aira-text-link); background: var(--aira-bg-selected); }
 .pv-mtable { max-height: 60vh; overflow: auto; }
+/* Optical spacing in toolbars: 4px between boxes, so the visible gap between CSV's text and the
+   copy glyph (8 + 4 + 6) matches copy glyph to the Export button's edge (6 + 4 + 8) = 18px */
+.pv-tbar-r { gap: var(--aira-sp-1); }
+.pv-tbar-r .btn.secondary { margin-inline-start: var(--aira-sp-2); }
+.btn.pv-csv, .btn.sm.pv-csv { padding-inline: var(--aira-sp-2); }
 
 /* Mobile editor preview (browser on iOS and Android). Every value is an --aira-* token. */
 .m-frame { width: 375px; max-width: 100%; }
