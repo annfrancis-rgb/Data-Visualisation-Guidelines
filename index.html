@@ -2380,6 +2380,10 @@ body { background: var(--aira-bg-canvas); }
 .dv-full-acts .dv-actions { opacity: 1 !important; }
 .dv-full-sep { width: 1px; height: 24px; background: var(--aira-border-default); }
 .dv-full-table { max-height: 60vh; overflow: auto; }
+/* Optical spacing in toolbars: equal visible gaps (18px) between CSV text, copy glyph and the Export button edge */
+.rt-tools { gap: var(--aira-sp-1); }
+.rt-tools .btn.secondary { margin-inline-start: var(--aira-sp-2); }
+.btn.dv-csv, .btn.sm.dv-csv { padding-inline: var(--aira-sp-2); }
 
 </style>
 <nav class="top">
