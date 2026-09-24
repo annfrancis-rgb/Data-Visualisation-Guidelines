@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Infographics preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1924,6 +1924,82 @@ body { background: var(--aira-bg-canvas); }
 [data-view="designer"] .section .dv-note code,
 [data-view="designer"] .section .dv-spec code { display: inline !important; }
 
+/* ── Chart card actions: on hover and keyboard focus with a mouse; always shown on touch ── */
+.dv-actions { align-items: center; }
+.dv-actions .iconbtn svg, .dv-actions .btn svg { width: 16px; height: 16px; }
+.dv-csv { gap: var(--aira-sp-1); padding-inline: var(--aira-sp-2); }
+@media (hover: hover) {
+  .dv-card .dv-actions { opacity: 0; transition: opacity var(--aira-motion-fast); }
+  .dv-card:hover .dv-actions, .dv-card:focus-within .dv-actions, .dv-card.is-table .dv-actions { opacity: 1; }
+}
+.iconbtn.is-copied, .iconbtn.is-copied:hover { color: var(--aira-text-success); }
+.dv-toast { position: fixed; left: 50%; bottom: calc(var(--aira-sp-6) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 130; max-width: calc(100% - 32px); padding: var(--aira-sp-3) var(--aira-sp-4); background: var(--aira-tooltip-bg); color: var(--aira-tooltip-text); border-radius: var(--aira-radius-md); box-shadow: var(--aira-shadow-md); font: var(--aira-t-body-sm); }
+
+/* Full screen view of one chart */
+.dv-full { position: fixed; inset: 0; z-index: 100; background: var(--aira-bg-overlay); display: flex; align-items: center; justify-content: center; padding: var(--aira-sp-6) var(--aira-sp-4); }
+.dv-full-dialog { width: 100%; max-width: 1040px; max-height: 100%; overflow: auto; background: var(--aira-bg-surface); border-radius: var(--aira-radius-lg); box-shadow: var(--aira-shadow-lg); padding: var(--aira-sp-6); display: flex; flex-direction: column; gap: var(--aira-sp-4); }
+.dv-full-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--aira-sp-3); }
+.dv-full-title { margin: 0; font: var(--aira-t-h3); color: var(--aira-text-primary); text-wrap: balance; }
+.dv-full-sub { margin: var(--aira-sp-1) 0 0; font: var(--aira-t-caption); color: var(--aira-text-tertiary); }
+.dv-full-foot { margin: 0; }
+.dv-full-plot { display: flex; flex-direction: column; gap: var(--aira-sp-3); }
+.dv-tip { z-index: 120; }
+
+/* ── Table header: the Artifact-preview format ── */
+.dv-dt th { background: var(--aira-bg-surface-alt); border-bottom: 1px solid var(--aira-border-default); color: var(--aira-text-primary); font: var(--aira-t-label-md); }
+
+/* ── Result tables (Artifact-preview format) ── */
+.rt { display: flex; flex-direction: column; }
+.rt-cellbar { display: flex; align-items: center; justify-content: flex-end; gap: var(--aira-sp-3); margin-bottom: var(--aira-sp-4); flex-wrap: wrap; }
+.rt-tabs { display: flex; gap: var(--aira-sp-8); border-bottom: 1px solid var(--aira-border-subtle); overflow-x: auto; scrollbar-width: none; }
+.rt-tab { position: relative; border: 0; background: transparent; padding: var(--aira-sp-3) 0; margin-bottom: -1px; font: var(--aira-t-label-md); color: var(--aira-text-tertiary); border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.rt-tab:hover:not([aria-selected="true"]) { color: var(--aira-text-secondary); border-bottom-color: var(--aira-border-strong); }
+.rt-tab[aria-selected="true"] { color: var(--aira-text-link); border-bottom-color: var(--aira-border-brand); }
+.rt-tab:focus-visible { outline: none; box-shadow: var(--aira-shadow-focus); border-radius: var(--aira-radius-sm); }
+.rt-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-4); margin-top: var(--aira-sp-4); flex-wrap: wrap; }
+.rt-count { font: var(--aira-t-body-sm); color: var(--aira-text-tertiary); }
+.rt-tools { display: inline-flex; align-items: center; gap: var(--aira-sp-2); }
+.rt-tools .iconbtn svg, .rt-tools .btn svg { width: 16px; height: 16px; }
+.rt-wrap { margin-top: var(--aira-sp-4); max-height: 560px; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--aira-border-strong) transparent; }
+.rt-wrap .dv-dt { font: var(--aira-t-body-sm); }
+.rt-wrap .dv-dt th { position: sticky; top: 0; z-index: 1; padding: var(--aira-sp-3) var(--aira-sp-5); }
+.rt-wrap .dv-dt td { padding: var(--aira-sp-4) var(--aira-sp-5); }
+.tfoot { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-4); margin-top: var(--aira-sp-4); padding-top: var(--aira-sp-4); border-top: 1px solid var(--aira-border-subtle); flex-wrap: wrap; }
+.pager { display: inline-flex; align-items: center; gap: var(--aira-sp-1); flex-wrap: wrap; }
+.pager .pg { min-width: 32px; height: 32px; padding: 0 6px; border: 1px solid transparent; background: transparent; color: var(--aira-text-secondary); border-radius: var(--aira-radius-sm); font: var(--aira-t-label-sm); font-size: 13px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.pager .pg:hover { background: var(--aira-bg-muted); color: var(--aira-text-primary); }
+.pager .pg[aria-current="page"] { border-color: var(--aira-border-brand); color: var(--aira-text-link); }
+.pager .ellipsis { min-width: 20px; text-align: center; color: var(--aira-text-tertiary); }
+.pager .nav { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; background: transparent; color: var(--aira-text-secondary); border-radius: var(--aira-radius-sm); cursor: pointer; }
+.pager .nav svg { width: 16px; height: 16px; }
+.pager .nav:hover:not(:disabled) { background: var(--aira-bg-muted); color: var(--aira-text-primary); }
+.pager .nav:disabled { color: var(--aira-text-disabled); cursor: default; }
+.dd { position: relative; }
+.dd__btn { display: inline-flex; align-items: center; gap: var(--aira-sp-2); height: 32px; padding: 0 var(--aira-sp-3); border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-md); background: var(--aira-bg-surface); color: var(--aira-text-secondary); font: var(--aira-t-label-sm); font-size: 13px; cursor: pointer; }
+.dd__btn:hover { border-color: var(--aira-border-strong); background: var(--aira-bg-surface-alt); }
+.dd__btn svg { width: 14px; height: 14px; color: var(--aira-text-tertiary); }
+.dd__menu { position: absolute; left: 0; bottom: calc(100% + 6px); min-width: 128px; list-style: none; margin: 0; padding: var(--aira-sp-1); background: var(--aira-bg-surface); border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-md); box-shadow: var(--aira-shadow-md); z-index: 30; }
+.dd__menu li { padding: 6px var(--aira-sp-3); border-radius: var(--aira-radius-sm); font: var(--aira-t-body-sm); color: var(--aira-text-secondary); cursor: pointer; }
+.dd__menu li:hover, .dd__menu li:focus-visible { background: var(--aira-bg-muted); outline: none; }
+.dd__menu li[aria-selected="true"] { color: var(--aira-text-link); font-weight: var(--aira-fw-medium); }
+
+/* ── Chart preview panel example ── */
+.pp { width: 610px; max-width: 100%; margin-inline: auto; background: var(--aira-bg-surface); border: 1px solid var(--aira-border-default); box-shadow: var(--aira-shadow-sm); }
+.pp-head { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-3); padding: var(--aira-sp-4) var(--aira-sp-6); border-bottom: 1px solid var(--aira-border-subtle); }
+.pp-title { margin: 0; font: var(--aira-t-h4); color: var(--aira-text-primary); }
+.pp-head-r { display: flex; align-items: center; gap: var(--aira-sp-2); }
+.pp-head-r .iconbtn svg { width: 18px; height: 18px; }
+.pp-vsep { width: 1px; height: 24px; background: var(--aira-border-default); }
+.pp-body { padding: 0 var(--aira-sp-6) var(--aira-sp-6); display: flex; flex-direction: column; gap: var(--aira-sp-4); }
+.pp-tools { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-3); padding-top: var(--aira-sp-4); flex-wrap: wrap; }
+.pp-tools-r { display: flex; align-items: center; gap: var(--aira-sp-2); }
+.pp-tools .btn svg { width: 16px; height: 16px; }
+.pp-seg { display: inline-flex; gap: var(--aira-sp-1); padding: var(--aira-sp-1); background: var(--aira-bg-sunken); border-radius: var(--aira-radius-md); }
+.pp-seg span { width: 40px; height: 28px; display: grid; place-items: center; color: var(--aira-text-tertiary); border-radius: var(--aira-radius-sm); }
+.pp-seg span svg { width: 18px; height: 18px; }
+.pp-seg span.on { background: var(--aira-bg-surface); color: var(--aira-text-primary); box-shadow: var(--aira-shadow-sm); }
+@media (max-width: 640px) { .pp-body { padding: 0 var(--aira-sp-4) var(--aira-sp-4); } .pp-head { padding: var(--aira-sp-3) var(--aira-sp-4); } }
+
 :root, :root[data-theme] { color-scheme: light; }
 .pv-card { margin: 0; }
 /* Editor preview panels only, at the size the editor opens at. Every value is an --aira-* token. */
@@ -2085,11 +2161,88 @@ svg { flex: none; }
 .dd__menu li:hover, .dd__menu li:focus-visible { background: var(--aira-bg-muted); outline: none; }
 .dd__menu li[aria-selected="true"] { color: var(--aira-text-link); font-weight: var(--aira-fw-medium); }
 
+/* Mobile editor preview (browser on iOS and Android). Every value is an --aira-* token. */
+.m-frame { width: 375px; max-width: 100%; }
+.m-screen { position: relative; height: min(812px, calc(100vh - 120px)); min-height: 600px; display: flex; flex-direction: column; overflow: hidden; background: var(--aira-bg-surface); border: 1px solid var(--aira-border-default); box-shadow: var(--aira-shadow-sm); }
+.m-status { flex: none; height: 44px; }
+.m-head { flex: none; display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; height: 56px; padding: 0 var(--aira-sp-2); border-bottom: 1px solid var(--aira-border-subtle); background: var(--aira-bg-surface); }
+.m-title { margin: 0; text-align: center; font: var(--aira-t-h4); color: var(--aira-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.m-head-r { display: flex; justify-content: flex-end; }
+.m-body { position: relative; flex: 1; min-height: 0; overflow-y: auto; padding: var(--aira-sp-4) var(--aira-sp-4) var(--aira-sp-6); scrollbar-width: none; }
+.m-body .pv-range { margin-bottom: var(--aira-sp-3); }
+.m-stack { display: flex; flex-direction: column; gap: var(--aira-sp-3); }
+.m-stack .pv-card { padding: var(--aira-sp-4); border-radius: var(--aira-radius-lg); }
+.m-body .pv-err .btn { height: 44px; }
+.m-hint, .m-note { display: flex; align-items: center; gap: var(--aira-sp-2); margin: var(--aira-sp-4) 0 0; padding: var(--aira-sp-3); background: var(--aira-bg-subtle); border-radius: var(--aira-radius-md); font: var(--aira-t-body-sm); color: var(--aira-text-tertiary); }
+.m-hint svg, .m-note svg { width: 16px; height: 16px; flex: none; }
+.m-feedback { display: flex; gap: var(--aira-sp-3); margin: var(--aira-sp-6) 0 0 -6px; color: var(--aira-text-secondary); }
+.m-body .pv-tables { margin-top: var(--aira-sp-6); }
+.m-body .pv-tabs { gap: var(--aira-sp-6); }
+.m-body .pv-tab { padding-block: var(--aira-sp-3); min-height: 44px; }
+.m-pin td:first-child { position: sticky; left: 0; z-index: 1; background: var(--aira-bg-surface); box-shadow: 1px 0 0 var(--aira-border-default); }
+.m-pin th:first-child { position: sticky; left: 0; z-index: 3; background: var(--aira-bg-surface-alt); box-shadow: 1px 0 0 var(--aira-border-default); }
+.m-pin tbody tr:hover td:first-child { background: var(--aira-bg-hover); }
+
+/* Bottom sheet: the phone's menu */
+.m-scrim { position: absolute; inset: 0; z-index: 40; background: var(--aira-bg-overlay); display: flex; align-items: flex-end; }
+.m-sheet { width: 100%; background: var(--aira-bg-surface); border-radius: var(--aira-radius-xl) var(--aira-radius-xl) 0 0; padding: var(--aira-sp-2) var(--aira-sp-4) calc(var(--aira-sp-4) + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; box-shadow: var(--aira-shadow-lg); max-height: 80%; overflow-y: auto; }
+.m-grab { align-self: center; width: 36px; height: 4px; border-radius: var(--aira-radius-pill); background: var(--aira-border-strong); margin-bottom: var(--aira-sp-3); }
+.m-sheet-t { margin: 0 0 var(--aira-sp-2); font: var(--aira-t-label-lg); color: var(--aira-text-primary); }
+.m-item { display: flex; align-items: center; gap: var(--aira-sp-3); min-height: 48px; padding: 0 var(--aira-sp-1); border: 0; border-bottom: 1px solid var(--aira-border-subtle); background: transparent; text-align: start; font: var(--aira-t-body-lg); color: var(--aira-text-primary); cursor: pointer; }
+.m-item svg { width: 20px; height: 20px; color: var(--aira-text-secondary); }
+.m-item:focus-visible { outline: none; background: var(--aira-bg-hover); }
+.m-cancel { height: 44px; margin-top: var(--aira-sp-4); }
+
+/* Full-screen chart */
+.m-full { position: absolute; inset: 0; z-index: 30; background: var(--aira-bg-surface); display: flex; flex-direction: column; padding-top: 44px; }
+.m-fullbody { flex: 1; overflow-y: auto; padding: var(--aira-sp-4); display: flex; flex-direction: column; gap: var(--aira-sp-4); }
+.m-fullbody .dv-sub { margin: 0; font: var(--aira-t-body-sm); color: var(--aira-text-tertiary); }
+
+.m-toast { position: absolute; left: var(--aira-sp-4); right: var(--aira-sp-4); bottom: var(--aira-sp-6); z-index: 50; padding: var(--aira-sp-3) var(--aira-sp-4); background: var(--aira-tooltip-bg); color: var(--aira-tooltip-text); border-radius: var(--aira-radius-md); box-shadow: var(--aira-shadow-md); font: var(--aira-t-body-sm); }
+
+/* Viewed on an actual phone: the frame is the screen */
+@media (max-width: 440px) {
+  .pv-stage { padding: var(--aira-sp-3) var(--aira-sp-4) var(--aira-sp-4); gap: var(--aira-sp-3); }
+  .m-frame { width: 100%; }
+  .m-screen { height: calc(100dvh - 140px); min-height: 480px; }
+  .m-status { display: none; }
+  .m-full { padding-top: 0; }
+}
+
+.m-tools { display: flex; align-items: center; justify-content: space-between; gap: var(--aira-sp-2); margin-bottom: var(--aira-sp-3); }
+.m-tools .btn { height: 44px; }
+.m-tools .btn svg { width: 18px; height: 18px; }
+.m-charts { padding-inline: var(--aira-sp-2); }
+.m-fullhead { flex: none; display: flex; align-items: center; height: 56px; padding: 0 var(--aira-sp-2); border-bottom: 1px solid var(--aira-border-subtle); }
+.m-fulltitle { margin: 0 0 var(--aira-sp-1); font: var(--aira-t-h3); color: var(--aira-text-primary); text-wrap: balance; }
+.m-fullbody .m-hint { margin-top: 0; }
+.m-body .pv-csv { height: 44px; }
+
+.m-stack .pv-card[data-state="ready"] { cursor: pointer; }
+.m-stack .pv-card[data-state="ready"]:active:not(.is-table) { background: var(--aira-bg-hover); }
+.m-stack .pv-card:focus-visible { box-shadow: var(--aira-shadow-focus); }
+
+/* Same visible icon buttons as web (32px, 28px on cards); touch gets a 44px hit area around them */
+.m-frame .iconbtn { position: relative; }
+.m-frame .iconbtn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
+.m-frame .iconbtn svg { width: 20px; height: 20px; }
+.m-more.iconbtn { width: 28px; height: 28px; }
+.m-more.iconbtn svg { width: 16px; height: 16px; }
+/* No hover on touch: a tapped button must not stay grey */
+@media (hover: none) {
+  .m-frame .iconbtn:hover { background: transparent; }
+  .m-frame .iconbtn:active { background: var(--aira-bg-pressed); }
+}
+.m-frame .pager .pg, .m-frame .pager .nav { position: relative; }
+.m-frame .pager .pg::after, .m-frame .pager .nav::after, .m-frame .dd__btn::after { content: ""; position: absolute; inset: -6px; }
+.m-frame .tfoot { gap: var(--aira-sp-3); }
+
 .pv-switchbar { flex-wrap: wrap; gap: var(--aira-sp-3); }
 </style>
 </head>
 <body>
-<main class="pv-stage"><div class="pv-switchbar"><div class="pv-switch" role="group" aria-label="Example"><button type="button" data-sw="a1" aria-pressed="true"><b>A</b>Five charts</button><button type="button" data-sw="a2" aria-pressed="false"><b>B</b>Charts and tables</button><button type="button" data-sw="a3" aria-pressed="false"><b>C</b>One chart</button><button type="button" data-sw="a4" aria-pressed="false"><b>D</b>Still drawing, one fails</button></div><button class="iconbtn" type="button" data-replay aria-label="Play the drawing again" title="Play the drawing again" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></button></div><section class="pv-frame" data-art="a1" id="web-a">
+
+<main class="pv-stage"><div class="pv-switchbar"><div class="pv-switch" role="group" aria-label="Platform"><button type="button" data-plat="web" aria-pressed="true">Web</button><button type="button" data-plat="mobile" aria-pressed="false">Mobile</button></div><div class="pv-switch" role="group" aria-label="Example"><button type="button" data-sw="a1" aria-pressed="true"><b>A</b>Five charts</button><button type="button" data-sw="a2" aria-pressed="false"><b>B</b>Charts and tables</button><button type="button" data-sw="a3" aria-pressed="false"><b>C</b>One chart</button><button type="button" data-sw="a4" aria-pressed="false"><b>D</b>Still drawing, one fails</button></div><button class="iconbtn" type="button" data-replay aria-label="Play the drawing again" title="Play the drawing again" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></button></div><section class="pv-frame" data-art="a1" id="web-a">
   <aside class="pv-panel">
     <div class="pv-phead"><h1 class="pv-ptitle"></h1><div class="pv-phead-r">
       <button class="iconbtn" type="button" data-act="wide" aria-label="Widen panel" title="Widen panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button>
@@ -2128,6 +2281,37 @@ svg { flex: none; }
     </div></div>
     <div class="pv-pbody"></div>
   </aside>
+</section><section class="m-frame" data-art="a1" id="mobile-a" hidden>
+  <div class="m-screen">
+    <div class="m-status" aria-hidden="true"></div>
+    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-body"></div>
+  </div>
+  <div class="m-toast" role="status" hidden></div>
+</section>
+<section class="m-frame" data-art="a2" id="mobile-b" hidden>
+  <div class="m-screen">
+    <div class="m-status" aria-hidden="true"></div>
+    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-body"></div>
+  </div>
+  <div class="m-toast" role="status" hidden></div>
+</section>
+<section class="m-frame" data-art="a3" id="mobile-c" hidden>
+  <div class="m-screen">
+    <div class="m-status" aria-hidden="true"></div>
+    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-body"></div>
+  </div>
+  <div class="m-toast" role="status" hidden></div>
+</section>
+<section class="m-frame" data-art="a4" id="mobile-d" hidden>
+  <div class="m-screen">
+    <div class="m-status" aria-hidden="true"></div>
+    <div class="m-head"><button class="iconbtn" type="button" data-act="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h1 class="m-title"></h1><span></span></div>
+    <div class="m-body"></div>
+  </div>
+  <div class="m-toast" role="status" hidden></div>
 </section></main>
 <div class="pv-modal" id="pv-modal" hidden>
   <div class="pv-dialog" role="dialog" aria-modal="true" aria-labelledby="pv-mt">
@@ -2809,6 +2993,198 @@ var C = (function () {
   $$('.pv-frame').forEach(function (f) { new Panel(f); });
   return P;
   })();
+  var PM = (function () {
+  // ── mobile: building blocks ───────────────────────────────
+  I.list = '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>';
+  I.up = '<path d="M7 10v11M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 7a2 2 0 0 1-2 1.7H7V10l4-8a3 3 0 0 1 4 3.9Z"/>';
+  I.down = '<path d="M17 14V3M9 18.1l1-4.1H4.2a2 2 0 0 1-2-2.3l1.4-7A2 2 0 0 1 5.6 3H17v11l-4 8a3 3 0 0 1-4-3.9Z"/>';
+  I.flag = '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M12 7v4M12 14h.01"/>';
+  I.hold = '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>';
+  I.swipe = '<path d="M18 8l4 4-4 4M6 8l-4 4 4 4M2 12h20"/>';
+  function tbl(t, pin) {
+    var head = t[0], rows = t[1], nums = t[2];
+    var h = '<table class="dv-dt' + (pin ? ' m-pin' : '') + '"><thead><tr>' + head.map(function (c, i) { return '<th' + (nums.indexOf(i) > -1 ? ' class="n"' : '') + '>' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr>' + r.map(function (c, i) { return '<td' + (nums.indexOf(i) > -1 ? ' class="n"' : '') + '>' + esc(c) + '</td>'; }).join('') + '</tr>'; });
+    return h + '</tbody></table>';
+  }
+  function cardHTML(p, c, state) {
+    var u = 'm' + p.key + '-' + c.id, body;
+    if (state === 'loading') body = '<div class="pv-skel" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="pv-skel-note" role="status">Drawing this chart…</p>';
+    else if (state === 'error') body = '<div class="pv-err" role="alert">' + ico('alert') + '<div><p class="pv-err-t">Couldn’t draw this chart</p><p class="pv-err-d">The query took too long to finish.</p><button class="btn secondary" type="button" data-act="retry">' + ico('retry') + 'Try again</button></div></div>';
+    else body = '<div class="dv-plot" data-chart="' + c.id + '" aria-labelledby="t-' + u + '" aria-describedby="s-' + u + '"></div><div class="dv-table" hidden>' + tbl(c.table) + '</div><p class="dv-sr" id="s-' + u + '">' + esc(c.sum) + '</p>';
+    var more = state === 'ready' ? '<button class="iconbtn m-more" type="button" data-act="more" aria-haspopup="dialog" aria-label="Actions for ' + esc(c.name) + '">' + ico('more') + '</button>' : '';
+    return '<figure class="dv-card pv-card" id="card-' + u + '" data-id="' + c.id + '" tabindex="' + (state === 'ready' ? '0' : '-1') + '"' + (state === 'ready' ? ' aria-label="' + esc(c.name) + '. Open full screen"' : '') + ' data-state="' + state + '">' +
+      '<div class="dv-head"><div><div class="dv-title" id="t-' + u + '">' + esc(c.name) + '</div><div class="dv-sub">' + esc(c.scope) + '</div></div>' + more + '</div>' +
+      body + (state === 'ready' ? '<p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p>' : '') + '</figure>';
+  }
+
+  // ── one phone per frame ────────────────────────────────────
+  var P = {};
+  function Phone(frame) {
+    this.frame = frame; this.key = frame.getAttribute('data-art'); this.a = ART[this.key];
+    this.screen = $('.m-screen', frame); this.body = $('.m-body', frame);
+    this.states = {};
+    $('.m-title', frame).textContent = this.a.title;
+    P[this.key] = this;
+    if (this.a.run) this.run(); else this.draw();
+  }
+  Phone.prototype.stateOf = function (c) { return this.states[c.id] || 'ready'; };
+  Phone.prototype.tables = function () {
+    var a = this.a, k = this.key; if (!a.tables) return '';
+    return '<div class="pv-tables"><div class="pv-tabs" role="tablist" aria-label="Result tables">' +
+      a.tables.map(function (t, i) { return '<button class="pv-tab" role="tab" id="tab-m' + k + t.id + '" aria-controls="tp-m' + k + t.id + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : '') + '>' + esc(t.name) + '</button>'; }).join('') + '</div>' +
+      a.tables.map(function (t, i) {
+        var wide = t.t[0].length > 3;
+        return '<div class="pv-tpanel" data-tid="' + t.id + '" data-page="1" data-per="10" role="tabpanel" id="tp-m' + k + t.id + '" aria-labelledby="tab-m' + k + t.id + '"' + (i ? ' hidden' : '') + '><div class="pv-tbar"><span class="pv-rows">' + countHTML(t) + '</span><div class="pv-tbar-r">' +
+          '<button class="btn tertiary pv-csv" type="button" data-act="download" aria-label="Download ' + esc(t.name) + ' as CSV">' + ico('download') + 'CSV</button><button class="iconbtn" type="button" data-act="copy-table" aria-label="Copy ' + esc(t.name) + '">' + ico('copy') + '</button></div></div>' +
+          '<div class="pv-twrap">' + tbl(pageT(t, 1, 10), wide) + '</div>' + (wide ? '<p class="m-note">' + ico('swipe') + 'Swipe sideways for the other ' + (t.t[0].length - 3) + ' columns. The first column stays put.</p>' : '') + tfootHTML(t, 1, 10, true) + '</div>';
+      }).join('') + '</div>';
+  };
+  Phone.prototype.draw = function () {
+    var self = this, a = this.a;
+    var tools = '<div class="m-tools">' + (a.charts.length >= 5 ? '<button class="btn tertiary m-charts" type="button" data-act="charts" aria-haspopup="dialog" aria-label="Go to a chart">Charts' + ico('chevron') + '</button>' : '<span></span>') +
+      '<button class="btn secondary" type="button" data-act="download-all">' + (a.charts.length + (a.tables ? a.tables.length : 0) > 1 ? 'Download all as CSV' : 'Download CSV') + '</button></div>';
+    this.body.innerHTML = tools + '<div class="m-stack">' + a.charts.map(function (c) { return cardHTML(self, c, self.stateOf(c)); }).join('') + '</div>' + this.tables() +
+      '<p class="m-hint">' + ico('hold') + 'Tap a chart to open it full screen. Touch and hold to read exact values.</p>' +
+      '<div class="m-feedback"><button class="iconbtn" type="button" aria-label="Good answer">' + ico('up') + '</button><button class="iconbtn" type="button" aria-label="Bad answer">' + ico('down') + '</button><button class="iconbtn" type="button" aria-label="Report a problem">' + ico('flag') + '</button></div>';
+    this.body.scrollTop = 0; mount(this.body);
+  };
+  Phone.prototype.replace = function (c) {
+    var old = $('#card-m' + this.key + '-' + c.id, this.body); if (!old) return;
+    var tmp = document.createElement('div'); tmp.innerHTML = cardHTML(this, c, this.stateOf(c));
+    old.replaceWith(tmp.firstChild); mount(this.body);
+  };
+  Phone.prototype.run = function () {
+    var self = this, token = {}; this.token = token;
+    this.a.charts.forEach(function (c) { self.states[c.id] = 'loading'; });
+    this.draw();
+    this.a.charts.forEach(function (c, i) {
+      setTimeout(function () { if (self.token !== token) return; self.states[c.id] = c.failFirst ? 'error' : 'ready'; self.replace(c); }, 900 + i * 700);
+    });
+  };
+  Phone.prototype.chart = function (id) { return this.a.charts.filter(function (c) { return c.id === id; })[0]; };
+
+  // ── bottom sheet, full-screen chart, toast (all inside the phone) ──
+  var lastFocus = null;
+  function sheet(p, title, items) {
+    closeSheet(p);
+    lastFocus = document.activeElement;
+    var s = document.createElement('div'); s.className = 'm-scrim';
+    s.innerHTML = '<div class="m-sheet" role="dialog" aria-modal="true" aria-label="' + esc(title) + '"><span class="m-grab" aria-hidden="true"></span><p class="m-sheet-t">' + esc(title) + '</p>' +
+      items.map(function (it) { return '<button type="button" class="m-item" data-sheet="' + it[0] + '">' + (it[2] ? ico(it[2]) : '') + '<span>' + esc(it[1]) + '</span></button>'; }).join('') +
+      '<button type="button" class="btn secondary m-cancel" data-sheet="cancel">Cancel</button></div>';
+    p.screen.appendChild(s); $('.m-item', s).focus();
+    return s;
+  }
+  function closeSheet(p) { var s = $('.m-scrim', p.screen); if (s) { s.remove(); if (lastFocus && lastFocus.isConnected) lastFocus.focus(); } }
+  function openFull(p, c) {
+    lastFocus = document.activeElement;
+    var f = document.createElement('div'); f.className = 'm-full pv-dialog'; f.setAttribute('role', 'dialog'); f.setAttribute('aria-modal', 'true'); f.setAttribute('aria-label', c.name);
+    f.innerHTML = '<div class="m-fullhead"><button class="iconbtn" type="button" data-act="full-close" aria-label="Close full screen">' + ico('close') + '</button></div>' +
+      '<div class="m-fullbody"><div><h2 class="m-fulltitle">' + esc(c.name) + '</h2><p class="dv-sub">' + esc(c.scope) + '</p></div><div class="dv-plot" data-chart="' + c.id + '" data-tall aria-label="' + esc(c.name) + '"></div><p class="dv-foot"><b>Source:</b> ' + SRC[c.id] + ' · As of 23 Sep 2026, 10:42 IST</p><p class="m-hint">' + ico('hold') + 'Touch and hold to read exact values.</p></div>';
+    p.screen.appendChild(f); mount(f); $('[data-act="full-close"]', f).focus();
+  }
+  function toast(p, msg) {
+    var t = $('.m-toast', p.frame); t.textContent = msg; t.hidden = false;
+    clearTimeout(t._t); t._t = setTimeout(function () { t.hidden = true; }, 2600);
+  }
+  var NOTDL = 'Downloads aren’t connected in this prototype.';
+  function copyText(p, text, btn) { copyWith(btn, text, function () { toast(p, 'Copy isn’t available here. Select the table instead.'); }); }
+  function tsv(table) { return Array.prototype.map.call(table.rows, function (r) { return Array.prototype.map.call(r.cells, function (c) { return c.textContent.trim(); }).join('\t'); }).join('\n'); }
+  function toggleTable(card) {
+    var plot = $('.dv-plot', card), t = $('.dv-table', card), on = t.hidden;
+    t.hidden = !on; plot.hidden = on; card.classList.toggle('is-table', on);
+    if (!on) { plot._m.force = true; render(plot._m); }
+  }
+
+  // ── events ─────────────────────────────────────────────────
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var fr = t.closest('.m-frame'); if (!fr) return;
+    var p = P[fr.getAttribute('data-art')];
+    if (t.classList.contains('m-scrim')) { closeSheet(p); return; }
+    var si = t.closest('[data-sheet]');
+    if (si) {
+      var v = si.getAttribute('data-sheet'), s = si.closest('.m-scrim'), card = s._card;
+      closeSheet(p);
+      if (v === 'cancel') return;
+      if (v.indexOf('go:') === 0) {
+        var target = $('#card-m' + p.key + '-' + v.slice(3), p.body);
+        p.body.scrollTo({ top: target.offsetTop - 12, behavior: reduce ? 'auto' : 'smooth' });
+        target.focus({ preventScroll: true }); target.classList.add('is-target'); setTimeout(function () { target.classList.remove('is-target'); }, 1600);
+        return;
+      }
+      var c = p.chart(card.getAttribute('data-id'));
+      if (v === 'table') toggleTable(card);
+      else if (v === 'copy') copyText(p, tsv($('.dv-table table', card)), $('.m-more', card));
+      else if (v === 'download') toast(p, NOTDL);
+      else if (v === 'expand') openFull(p, c);
+      return;
+    }
+    var tab = t.closest('.pv-tab'); if (tab) { selTab(tab); return; }
+    var ab = t.closest('[data-act]');
+    if (!ab) {
+      var tc = t.closest('.m-stack .pv-card[data-state="ready"]');
+      if (tc && !tc.classList.contains('is-table')) { if (held) { held = false; return; } openFull(p, p.chart(tc.getAttribute('data-id'))); }
+      return;
+    }
+    var act = ab.getAttribute('data-act');
+    if (act === 'close') { toast(p, 'In aiRA this goes back to the chat.'); return; }
+    if (act === 'full-close') { var f = ab.closest('.m-full'); f.remove(); hide(); if (lastFocus && lastFocus.isConnected) lastFocus.focus(); return; }
+    if (act === 'charts') { sheet(p, 'Charts', p.a.charts.map(function (c) { return ['go:' + c.id, c.name]; })); return; }
+    if (act === 'download-all' || act === 'download') { toast(p, NOTDL); return; }
+    if (act === 'copy-table') { copyText(p, tsv($('table', ab.closest('.pv-tpanel'))), ab); return; }
+    var cardEl = ab.closest('.pv-card');
+    if (act === 'more') {
+      var isT = cardEl.classList.contains('is-table');
+      var s2 = sheet(p, p.chart(cardEl.getAttribute('data-id')).name, [['table', isT ? 'View as chart' : 'View as table', isT ? 'chart' : 'table'], ['copy', 'Copy data', 'copy'], ['download', 'Download CSV', 'download']]);
+      s2._card = cardEl; return;
+    }
+    if (act === 'retry') {
+      var c2 = p.chart(cardEl.getAttribute('data-id'));
+      p.states[c2.id] = 'loading'; p.replace(c2);
+      setTimeout(function () { p.states[c2.id] = 'ready'; p.replace(c2); }, 900);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    var kc = e.target.closest && e.target.closest('.m-stack .pv-card[data-state="ready"]');
+    if (kc && e.target === kc && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); var kf = kc.closest('.m-frame'); openFull(P[kf.getAttribute('data-art')], P[kf.getAttribute('data-art')].chart(kc.getAttribute('data-id'))); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var fr = e.target.closest && e.target.closest('.m-frame'); if (!fr) return;
+    var p = P[fr.getAttribute('data-art')], full = $('.m-full', p.screen);
+    if ($('.m-scrim', p.screen)) closeSheet(p);
+    else if (full) { full.remove(); hide(); if (lastFocus) lastFocus.focus(); }
+  });
+  function selTab(tab) {
+    var tabs = $$('.pv-tab', tab.parentNode);
+    tabs.forEach(function (x) { var on = x === tab; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; $('#' + x.getAttribute('aria-controls')).hidden = !on; });
+    tab.focus();
+  }
+  document.addEventListener('keydown', function (e) {
+    var tab = e.target.closest && e.target.closest('.pv-tab'); if (!tab) return;
+    var tabs = $$('.pv-tab', tab.parentNode), i = tabs.indexOf(tab);
+    if (e.key === 'ArrowRight') selTab(tabs[(i + 1) % tabs.length]);
+    if (e.key === 'ArrowLeft') selTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+  });
+  // Touch and hold reads a value; lifting the finger clears it after a moment.
+  var holdT, clearT, held = false;
+  document.addEventListener('touchstart', function (e) {
+    var g = e.target.closest && e.target.closest('.dv-svg .hit'); if (!g) return;
+    clearTimeout(clearT); held = false; holdT = setTimeout(function () { held = true; show(g); }, 300);
+  }, { passive: true });
+  document.addEventListener('touchmove', function (e) {
+    if (!hot) { clearTimeout(holdT); return; }
+    var pt = e.touches[0], el = document.elementFromPoint(pt.clientX, pt.clientY), g = el && el.closest && el.closest('.dv-svg .hit');
+    if (g && g !== hot) show(g);
+  }, { passive: true });
+  document.addEventListener('touchend', function () { clearTimeout(holdT); clearT = setTimeout(hide, 1500); }, { passive: true });
+
+  $$('.m-frame').forEach(function (f) { new Phone(f); });
+
+  return P;
+  })();
 
   // ── platform + example switch ──────────────────────────────
   var plat = 'web', scr = 'a1', LET = { a1: 'a', a2: 'b', a3: 'c', a4: 'd' };
@@ -2819,14 +3195,14 @@ var C = (function () {
     $$('.m-frame').forEach(function (f) { f.hidden = !(plat === 'mobile' && f.getAttribute('data-art') === scr); });
     $('[data-replay]').hidden = scr !== 'a4';
     hide();
-    if (scr === 'a4' && replay !== false) PW.a4.run(); else mounted.forEach(render);
+    if (scr === 'a4' && replay !== false) (plat === 'web' ? PW : PM).a4.run(); else mounted.forEach(render);
     try { history.replaceState(null, '', '#' + plat + '-' + LET[scr]); } catch (err) {}
   }
   document.addEventListener('click', function (e) {
     var t = e.target;
     var pb = t.closest && t.closest('[data-plat]'); if (pb) { plat = pb.getAttribute('data-plat'); showSel(); return; }
     var sb = t.closest && t.closest('[data-sw]'); if (sb) { scr = sb.getAttribute('data-sw'); showSel(); return; }
-    if (t.closest && t.closest('[data-replay]')) PW.a4.run();
+    if (t.closest && t.closest('[data-replay]')) (plat === 'web' ? PW : PM).a4.run();
   });
   var h = (location.hash || '').slice(1).split('-');
   if (h.length === 2 && (h[0] === 'web' || h[0] === 'mobile')) {
@@ -2837,5 +3213,6 @@ var C = (function () {
 })();
 
 </script>
+
 </body>
 </html>
