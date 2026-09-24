@@ -2385,6 +2385,47 @@ body { background: var(--aira-bg-canvas); }
 .rt-tools .btn.secondary { margin-inline-start: var(--aira-sp-2); }
 .btn.dv-csv, .btn.sm.dv-csv { padding-inline: var(--aira-sp-2); }
 
+/* ── Mobile example: a 375px phone ── */
+.ph { width: 375px; max-width: 100%; margin-inline: auto; }
+.ph-screen { position: relative; height: 720px; display: flex; flex-direction: column; overflow: hidden; background: var(--aira-bg-surface); border: 1px solid var(--aira-border-default); box-shadow: var(--aira-shadow-sm); }
+.ph-head { flex: none; display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; height: 56px; padding: 0 var(--aira-sp-2); border-bottom: 1px solid var(--aira-border-subtle); }
+.ph-head > .iconbtn { justify-self: end; }
+.ph-title { margin: 0; text-align: center; font: var(--aira-t-h4); color: var(--aira-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ph-body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--aira-sp-4); scrollbar-width: none; }
+.ph-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--aira-sp-3); }
+.ph-tools .btn { height: 44px; }
+.ph-stack { display: flex; flex-direction: column; gap: var(--aira-sp-3); }
+.ph-card { cursor: pointer; border-radius: var(--aira-radius-lg); }
+.ph-card:active:not(.is-table) { background: var(--aira-bg-hover); }
+.ph-card:focus-visible { outline: none; box-shadow: var(--aira-shadow-focus); }
+.ph-hint { display: flex; align-items: center; gap: var(--aira-sp-2); margin: var(--aira-sp-4) 0 0; padding: var(--aira-sp-3); background: var(--aira-bg-subtle); border-radius: var(--aira-radius-md); font: var(--aira-t-body-sm); color: var(--aira-text-tertiary); }
+.ph-hint svg { width: 16px; height: 16px; flex: none; }
+/* Same visible buttons as web; a 44px tap area around each */
+.ph-screen .iconbtn { position: relative; }
+.ph-screen .iconbtn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
+.ph-screen .iconbtn svg { width: 18px; height: 18px; }
+.ph-more svg { width: 16px !important; height: 16px !important; }
+@media (hover: none) { .ph-screen .iconbtn:hover { background: transparent; } .ph-screen .iconbtn:active { background: var(--aira-bg-pressed); } }
+.ph-tablewrap { overflow-x: auto; }
+.ph-pin th:first-child, .ph-pin td:first-child { position: sticky; left: 0; background: var(--aira-bg-surface); box-shadow: 1px 0 0 var(--aira-border-default); }
+.ph-pin th:first-child { background: var(--aira-bg-surface-alt); }
+.ph-scrim { position: absolute; inset: 0; z-index: 40; background: var(--aira-bg-overlay); display: flex; align-items: flex-end; }
+.ph-sheet { width: 100%; background: var(--aira-bg-surface); border-radius: var(--aira-radius-xl) var(--aira-radius-xl) 0 0; padding: var(--aira-sp-2) var(--aira-sp-4) calc(var(--aira-sp-4) + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; box-shadow: var(--aira-shadow-lg); }
+.ph-grab { align-self: center; width: 36px; height: 4px; border-radius: var(--aira-radius-pill); background: var(--aira-border-strong); margin-bottom: var(--aira-sp-3); }
+.ph-sheet-t { margin: 0 0 var(--aira-sp-2) !important; font: var(--aira-t-label-lg); color: var(--aira-text-primary) !important; }
+.ph-item { display: flex; align-items: center; gap: var(--aira-sp-3); min-height: 48px; padding: 0 var(--aira-sp-1); border: 0; border-bottom: 1px solid var(--aira-border-subtle); background: transparent; text-align: start; font: var(--aira-t-body-lg); color: var(--aira-text-primary); cursor: pointer; }
+.ph-item svg { width: 20px; height: 20px; color: var(--aira-text-secondary); }
+.ph-item:focus-visible { outline: none; background: var(--aira-bg-hover); }
+.ph-cancel { height: 44px; margin-top: var(--aira-sp-4); }
+.ph-full { position: absolute; inset: 0; z-index: 30; background: var(--aira-bg-surface); display: flex; flex-direction: column; }
+.ph-fullhead { flex: none; display: flex; align-items: center; justify-content: flex-end; gap: var(--aira-sp-2); height: 56px; padding: 0 var(--aira-sp-2); border-bottom: 1px solid var(--aira-border-subtle); }
+.ph-vsep { width: 1px; height: 24px; background: var(--aira-border-default); }
+.ph-fullbody { flex: 1; overflow-y: auto; padding: var(--aira-sp-4); display: flex; flex-direction: column; gap: var(--aira-sp-4); }
+.ph-fulltitle { margin: 0 0 var(--aira-sp-1); font: var(--aira-t-h3); color: var(--aira-text-primary); text-wrap: balance; }
+.ph-fullbody .dv-sub { margin: 0; }
+.ph-fullbody .dv-foot, .ph-fullbody .ph-hint { margin: 0; }
+.ph-full.is-table .ph-hint { display: none; }
+
 </style>
 <nav class="top">
   <button class="dv-navbtn controls-btn" type="button" id="dv-nav" aria-expanded="false" aria-controls="sidebar" style="font: var(--aira-t-label-sm); color: var(--aira-text-secondary); background: transparent; border: 1px solid var(--aira-border-default); border-radius: var(--aira-radius-sm); padding: 6px 10px; align-items: center; gap: var(--aira-sp-1); cursor: pointer;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Contents</button>
@@ -2404,7 +2445,7 @@ body { background: var(--aira-bg-canvas); }
 <div class="layout">
 <aside class="side" id="sidebar">
   <div class="search-wrap"><input class="search" id="ds-search" type="search" placeholder="Search…" aria-label="Search"><div class="empty-search">No matches.</div></div>
-  <div class="group"><h6>Get started</h6><a href="#cover">Overview</a><a href="#how-to-use">How to use</a></div><div class="group"><h6>Shared parts</h6><a href="#chart-card">Chart card</a><a href="#chart-key">Chart key</a><a href="#chart-tooltip">Chart tooltip</a></div><div class="group"><h6>Core charts</h6><a href="#bar-chart">Bar chart</a><a href="#line-chart">Line chart</a><a href="#bullet">Bullet chart</a><a href="#waterfall">Waterfall chart</a><a href="#funnel">Funnel chart</a><a href="#heatmap">Heatmap and cohort grid</a><a href="#scatter">Scatter chart</a><a href="#dot-plot">Dot plot and dumbbell</a><a href="#donut">Donut and pie charts</a><a href="#test-result">Test result</a></div><div class="group"><h6>Specialist charts</h6><a href="#slope">Slope chart</a><a href="#bump">Bump chart</a><a href="#box-plot">Box plot</a><a href="#strip-plot">Strip plot</a><a href="#waffle">Waffle chart</a><a href="#treemap">Treemap</a><a href="#pareto">Pareto chart</a><a href="#sankey">Sankey chart</a><a href="#map">Maps</a></div><div class="group"><h6>Chart settings</h6><a href="#anomalies">Anomaly markers</a><a href="#reference-lines">Reference lines and error bars</a><a href="#moving-average">Moving average</a></div><div class="group"><h6>Tables</h6><a href="#result-tables">Result tables</a><a href="#scorecard">Scorecard</a><a href="#matrix">Matrix</a></div><div class="group"><h6>Layouts</h6><a href="#chart-preview">Chart preview panel</a><a href="#dashboards">Dashboards</a></div><div class="group"><h6>Governance</h6><a href="#power-bi">Power BI coverage</a><a href="#proposed-tokens">Proposed tokens</a><a href="#divergences">Divergences found</a></div><div class="group"><h6>Related</h6><a href="https://claude.ai/code/artifact/9e5f2298-1e03-43cf-9ee9-3266387433e5">Foundations draft</a><a href="https://punyashetty-cpu.github.io/aiRA-Design-System-v1.1/#data-viz">aiRA Design System</a></div>
+  <div class="group"><h6>Get started</h6><a href="#cover">Overview</a><a href="#how-to-use">How to use</a></div><div class="group"><h6>Shared parts</h6><a href="#chart-card">Chart card</a><a href="#chart-key">Chart key</a><a href="#chart-tooltip">Chart tooltip</a></div><div class="group"><h6>Core charts</h6><a href="#bar-chart">Bar chart</a><a href="#line-chart">Line chart</a><a href="#bullet">Bullet chart</a><a href="#waterfall">Waterfall chart</a><a href="#funnel">Funnel chart</a><a href="#heatmap">Heatmap and cohort grid</a><a href="#scatter">Scatter chart</a><a href="#dot-plot">Dot plot and dumbbell</a><a href="#donut">Donut and pie charts</a><a href="#test-result">Test result</a></div><div class="group"><h6>Specialist charts</h6><a href="#slope">Slope chart</a><a href="#bump">Bump chart</a><a href="#box-plot">Box plot</a><a href="#strip-plot">Strip plot</a><a href="#waffle">Waffle chart</a><a href="#treemap">Treemap</a><a href="#pareto">Pareto chart</a><a href="#sankey">Sankey chart</a><a href="#map">Maps</a></div><div class="group"><h6>Chart settings</h6><a href="#anomalies">Anomaly markers</a><a href="#reference-lines">Reference lines and error bars</a><a href="#moving-average">Moving average</a></div><div class="group"><h6>Tables</h6><a href="#result-tables">Result tables</a><a href="#scorecard">Scorecard</a><a href="#matrix">Matrix</a></div><div class="group"><h6>Layouts</h6><a href="#chart-preview">Chart preview panel</a><a href="#dashboards">Dashboards</a><a href="#mobile">Mobile</a></div><div class="group"><h6>Governance</h6><a href="#power-bi">Power BI coverage</a><a href="#proposed-tokens">Proposed tokens</a><a href="#divergences">Divergences found</a></div><div class="group"><h6>Related</h6><a href="https://claude.ai/code/artifact/9e5f2298-1e03-43cf-9ee9-3266387433e5">Foundations draft</a><a href="https://punyashetty-cpu.github.io/aiRA-Design-System-v1.1/#data-viz">aiRA Design System</a></div>
 </aside>
 <main class="main">
 <section class="section" id="cover">
@@ -3045,7 +3086,7 @@ body { background: var(--aira-bg-canvas); }
 </section>
 <section class="section" id="chart-preview">
 <h1>Chart preview panel</h1>
-<div class="meta-strip" aria-label="Component metadata"><span class="meta-pill status-experimental">Proposed</span><span class="meta-time">Updated <time>2026-09-23</time></span><span class="meta-owner">Design system owner · Punya Shetty</span></div><p class="lede">How several charts, or charts with tables, appear in the preview panel beside the chat on desktop web. Every chart is its own chart card; the panel only arranges the cards. Try every case in the <a href="https://annfrancis-rgb.github.io/Data-Visualisation-Guidelines/infographics-preview/">live prototype</a>. Mobile rules come later.</p><h2>Example</h2><div class="card-demo"><div class="pp" role="group" aria-label="Example preview panel">
+<div class="meta-strip" aria-label="Component metadata"><span class="meta-pill status-experimental">Proposed</span><span class="meta-time">Updated <time>2026-09-23</time></span><span class="meta-owner">Design system owner · Punya Shetty</span></div><p class="lede">How several charts, or charts with tables, appear in the preview panel beside the chat on desktop web. Every chart is its own chart card; the panel only arranges the cards. Try every case in the <a href="https://annfrancis-rgb.github.io/Data-Visualisation-Guidelines/chart-preview/">live prototype</a>. Mobile rules come later.</p><h2>Example</h2><div class="card-demo"><div class="pp" role="group" aria-label="Example preview panel">
   <div class="pp-head"><h3 class="pp-title">Store and tier activity</h3><div class="pp-head-r">
     <span class="iconbtn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span><span class="pp-vsep" aria-hidden="true"></span><span class="iconbtn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></div></div>
   <div class="pp-body">
@@ -3089,6 +3130,36 @@ body { background: var(--aira-bg-canvas); }
 <section class="section" id="dashboards">
 <h1>Dashboards</h1>
 <div class="meta-strip" aria-label="Component metadata"><span class="meta-pill status-experimental">Proposed</span><span class="meta-time">Updated <time>2026-09-23</time></span><span class="meta-owner">Design system owner · Punya Shetty</span></div><p class="lede">A dashboard is chart cards in a grid, re-run live when it opens. Each tile follows the Chart card block exactly: the same title, subtitle, trust line, actions, hover and full screen as in the preview panel. These rules arrange the tiles.</p><h2>Reading order</h2><ul><li><b>Header:</b> title, period, filters and the as-of time.</li><li><b>Row 1:</b> two to four KPI tiles.</li><li><b>Row 2:</b> the main trend, full width. This is the chart that answers the dashboard's main question.</li><li><b>Row 3:</b> breakdowns, two or three across.</li><li><b>Row 4:</b> the detail table, in the Result tables format.</li></ul><h2>Grid</h2><div class="dv-tablewrap"><table class="props dv-spec"><thead><tr><th>Tile</th><th>Columns at lg and xl</th><th>Use</th></tr></thead><tbody><tr><td>KPI</td><td>3 (four across) or 4 (three across)</td><td>Single numbers</td></tr><tr><td>Full</td><td>12</td><td>The main trend, detail tables</td></tr><tr><td>Half</td><td>6</td><td>Two related breakdowns side by side</td></tr><tr><td>Third</td><td>4</td><td>Three small breakdowns</td></tr></tbody></table></div><ul><li>12 columns at <code>lg</code> and <code>xl</code>, 8 at <code>md</code>, 4 at <code>sm</code>.</li><li>Gap between tiles <code>--aira-sp-4</code>; page padding <code>--aira-sp-6</code>.</li><li>Tiles in a row share one height, and their plots share one baseline, so axes line up.</li><li>No chart tile narrower than 4 columns.</li></ul><h2>Consistency across the page</h2><div class="dv-tablewrap"><table class="props dv-spec"><thead><tr><th>Rule</th><th>Why</th></tr></thead><tbody><tr><td>One period for the whole dashboard, stated once in the header. A tile that differs says so in its subtitle</td><td>Readers assume tiles are comparable</td></tr><tr><td>The same category keeps the same colour in every tile</td><td>Otherwise Gold is indigo in one chart and green in the next</td></tr><tr><td>Charts meant to be compared share a scale</td><td>Two bars of equal height must mean equal values</td></tr><tr><td>One comparison basis for all deltas: previous period or last year</td><td>Mixed bases make the KPI row contradict itself</td></tr><tr><td>Every tile keeps its own trust line</td><td>Tiles can come from different tables</td></tr></tbody></table></div><h2>Limits</h2><ul><li>Up to 6 charts visible in one screen at <code>lg</code>, and up to 12 on a dashboard.</li><li>More than that: group them into tabs, one question per tab.</li><li>One highlight colour per dashboard for "this is the story".</li></ul><h2>Filters and cross-highlighting</h2><ul><li>Dashboard filters sit in the header and apply to every tile. Applied filters stay visible as chips, with clear all.</li><li>A tile with its own filter names it in its subtitle ("Gold tier only").</li><li>Changing a filter re-runs the queries and updates every as-of time.</li><li>Clicking a bar highlights that item in every tile; it does not filter. The highlight shows as a removable chip in the header, and Escape clears it.</li><li>Asking a follow-up about a data point opens a new chat, never a conversation inside the dashboard.</li></ul>
+</section>
+<section class="section" id="mobile">
+<h1>Mobile</h1>
+<div class="meta-strip" aria-label="Component metadata"><span class="meta-pill status-experimental">Proposed</span><span class="meta-time">Updated <time>2026-09-23</time></span><span class="meta-owner">Design system owner · Punya Shetty</span></div><p class="lede">On iOS and Android, aiRA runs in the phone's browser with the same code as desktop; a native app comes later. Every chart is the same chart card as on web, with the same title, subtitle, plot, key and trust line. Only the controls around the card change for touch. Try it in the <a href="https://annfrancis-rgb.github.io/Data-Visualisation-Guidelines/chart-preview/#mobile-a">live prototype</a>.</p><h2>Example</h2><div class="card-demo"><div class="ph" role="group" aria-label="Example phone screen">
+  <div class="ph-screen">
+    <div class="ph-head"><span></span><h3 class="ph-title">Store and tier activity</h3><button class="iconbtn" type="button" data-ph="close" aria-label="Back to the chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="ph-body">
+      <div class="ph-tools"><span></span><button class="btn secondary" type="button" data-ph="csv-all">Download all as CSV</button></div>
+      <div class="ph-stack">
+        <figure class="dv-card ph-card" data-ph-card tabindex="0" aria-label="Redemptions by store. Open full screen" style="margin:0">
+  <div class="dv-head"><div><div class="dv-title" id="pha-t">Redemptions by store</div><div class="dv-sub">Redemptions · count · 1–23 Sep 2026 · all tiers</div></div>
+    <button class="iconbtn sm ph-more" type="button" data-ph="more" aria-haspopup="dialog" aria-label="Actions for Redemptions by store"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+  <div class="dv-plot" data-chart="stores" aria-labelledby="pha-t" aria-describedby="pha-s"></div>
+  <p class="dv-sr" id="pha-s">Bar chart of redemptions by store. HSR Layout led with 18,420.</p>
+  <div class="dv-table ph-tablewrap" hidden><table class="dv-dt"><thead><tr><th>Store</th><th class="n">Redemptions</th></tr></thead><tbody><tr><td>HSR Layout</td><td class="n">18,420</td></tr><tr><td>Indiranagar</td><td class="n">15,230</td></tr><tr><td>Koramangala</td><td class="n">11,910</td></tr><tr><td>Whitefield</td><td class="n">9,640</td></tr><tr><td>Jayanagar</td><td class="n">7,120</td></tr><tr><td>Malleshwaram</td><td class="n">5,310</td></tr></tbody></table></div>
+  <figcaption class="dv-foot"><b>Source:</b> write_db_100783.redemptions_aira · As of 23 Sep 2026, 10:42 IST</figcaption>
+</figure>
+        <figure class="dv-card ph-card" data-ph-card tabindex="0" aria-label="Active members by tier. Open full screen" style="margin:0">
+  <div class="dv-head"><div><div class="dv-title" id="phb-t">Active members by tier</div><div class="dv-sub">Active members · count · Mar–Aug 2026 · by tier</div></div>
+    <button class="iconbtn sm ph-more" type="button" data-ph="more" aria-haspopup="dialog" aria-label="Actions for Active members by tier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+  <div class="dv-plot" data-chart="tiers" aria-labelledby="phb-t" aria-describedby="phb-s"></div>
+  <p class="dv-sr" id="phb-s">Line chart of active members by tier.</p>
+  <div class="dv-table ph-tablewrap" hidden><table class="dv-dt"><thead><tr><th>Month</th><th class="n">Silver</th><th class="n">Gold</th><th class="n">Platinum</th></tr></thead><tbody><tr><td>Mar 2026</td><td class="n">11,200</td><td class="n">6,800</td><td class="n">2,100</td></tr><tr><td>Apr 2026</td><td class="n">11,050</td><td class="n">6,950</td><td class="n">2,180</td></tr><tr><td>May 2026</td><td class="n">11,500</td><td class="n">7,200</td><td class="n">2,250</td></tr><tr><td>Jun 2026</td><td class="n">11,800</td><td class="n">7,050</td><td class="n">2,300</td></tr><tr><td>Jul 2026</td><td class="n">12,100</td><td class="n">7,600</td><td class="n">2,450</td></tr><tr><td>Aug 2026</td><td class="n">12,400</td><td class="n">8,000</td><td class="n">2,600</td></tr></tbody></table></div>
+  <figcaption class="dv-foot"><b>Source:</b> write_db_100783.members_aira · As of 23 Sep 2026, 10:42 IST</figcaption>
+</figure>
+      </div>
+      <p class="ph-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Tap a chart to open it full screen. Touch and hold to read exact values.</p>
+    </div>
+  </div>
+</div><p class="dv-note" style="margin-top: var(--aira-sp-4)">A 375px phone. Tap a card to open it full screen, or its "…" for the menu.</p></div><h2>What stays the same</h2><ul><li>The chart card's anatomy, titles, colours, keys and trust line.</li><li>The Result tables format, alignment by column type, and monochrome cells.</li><li>Loading, error and empty states, word for word.</li><li>The visible size and shape of every button. Only the tap area grows (see Touch targets).</li></ul><h2>What changes on touch</h2><div class="dv-tablewrap"><table class="props dv-spec"><thead><tr><th>Part</th><th>Web</th><th>Mobile</th></tr></thead><tbody><tr><td>Panel header</td><td>Title left; widen and close at the right</td><td>Title centred; close at the top right. No widen</td></tr><tr><td>Preview / Code</td><td>Shown</td><td>Not shown</td></tr><tr><td>Toolbar</td><td>In the panel toolbar</td><td>A row under the header: <b>Charts</b> menu on the left (five charts or more), <b>Download all as CSV</b> on the right (<b>Download CSV</b> for one chart)</td></tr><tr><td>Columns</td><td>One, or two when widened</td><td>Always one</td></tr><tr><td>Card actions</td><td>On hover and keyboard focus</td><td>A "…" button on each card opens a bottom sheet: View as table, Copy data, Download CSV, Open full screen, Cancel</td></tr><tr><td>Opening full screen</td><td>The full-screen button</td><td>Tap the card, or Open full screen in its menu. There is always a visible way in, never only the gesture</td></tr><tr><td>Full screen</td><td>A window over the page</td><td>Fills the phone. "…", a divider and close at the top right. The chart is taller; View as table fills the screen with the first column fixed</td></tr><tr><td>Reading values</td><td>Hover</td><td>Touch and hold a mark, slide to move along the chart, lift to clear after 1.5 seconds. A hint under the cards says so</td></tr><tr><td>Charts menu</td><td>A dropdown</td><td>A bottom sheet listing the chart names</td></tr><tr><td>Tables</td><td>CSV, copy and Export to FTP</td><td>CSV and copy; Export to FTP stays on desktop. With more than three columns the first column stays fixed, and a note says how many columns scroll sideways. The pager shows fewer page numbers</td></tr><tr><td>Copy confirmation</td><td>Tick on the copy button</td><td>Tick on the "…" button that opened the menu</td></tr></tbody></table></div><h2>Touch targets</h2><ul><li>Buttons look exactly as on web: 28px on cards, 32px in headers, the same radius and fill.</li><li>Each gets an invisible 44px tap area around it. Neighbouring buttons sit at least 12px apart so tap areas never overlap.</li><li>No hover on touch. A tapped button shows only a pressed state (<code>--aira-bg-pressed</code>) while the finger is down, so it never stays grey.</li><li>Sheets and full screen respect the safe areas (<code>--aira-safe-*</code>) for the notch and the home indicator.</li></ul><h2>Charts at phone width</h2><ul><li>Twelve labelled columns do not fit, so a column chart becomes horizontal bars when its card is narrower than 480px. The data and labels stay the same.</li><li>The month axis shows every second or third month, and the year again wherever it changes.</li><li>Half-width pairing never applies: every chart is full width.</li><li>Direct labels stay; when line ends would collide, they keep at least 15px apart.</li></ul><h2>Do / don't</h2><div class="do-dont"><div class="card-vd do"><div class="lab">Do</div><p>Keep the chart card identical to web, and change only the controls around it.</p></div><div class="card-vd dont"><div class="lab">Don't</div><p>Draw a separate mobile chart, or drop the trust line to save space.</p></div><div class="card-vd do"><div class="lab">Do</div><p>Give every gesture a visible control too: tap to open full screen, and Open full screen in the menu.</p></div><div class="card-vd dont"><div class="lab">Don't</div><p>Put close on the left because a platform sheet does. It sits at the top right on every platform.</p></div></div>
 </section>
 <section class="section" id="power-bi">
 <h1>Power BI coverage</h1>
@@ -4158,6 +4229,92 @@ function setView(v) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { items[(k + (e.key === 'ArrowDown' ? 1 : items.length - 1)) % items.length].focus(); e.preventDefault(); }
     if (e.key === 'Enter' || e.key === ' ') { li.click(); e.preventDefault(); }
     if (e.key === 'Escape') { closeDD(); $('[data-dd]', li.closest('.dd')).focus(); }
+  });
+})();
+
+</script>
+<script>
+/* Mobile example: the same chart cards with touch controls — a "…" bottom sheet,
+   tap a card for full screen, and full screen with its own "…" menu. */
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  var I = {
+    table: '<path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 9h18M3 15h18M9 3v18"/>',
+    chart: '<path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-7"/>',
+    copy: '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16a2 2 0 0 1-1-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 1"/>',
+    download: '<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>',
+    expand: '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
+    more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    close: '<path d="M6 6l12 12M18 6 6 18"/>',
+    hold: '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'
+  };
+  function ico(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + I[n] + '</svg>'; }
+  function hideTip() { var t = $('.dv-tip'); if (t) t.hidden = true; }
+  var lastFocus = null;
+  function sheet(screen, title, items, target, opener) {
+    closeSheet(screen);
+    lastFocus = opener || document.activeElement;
+    var s = document.createElement('div'); s.className = 'ph-scrim';
+    s.innerHTML = '<div class="ph-sheet" role="dialog" aria-modal="true" aria-label="' + esc(title) + '"><span class="ph-grab" aria-hidden="true"></span><p class="ph-sheet-t">' + esc(title) + '</p>' +
+      items.map(function (it) { return '<button type="button" class="ph-item" data-ph-item="' + it[0] + '">' + ico(it[2]) + '<span>' + esc(it[1]) + '</span></button>'; }).join('') +
+      '<button type="button" class="btn secondary ph-cancel" data-ph-item="cancel">Cancel</button></div>';
+    s._target = target; s._opener = opener;
+    screen.appendChild(s); $('.ph-item', s).focus();
+  }
+  function closeSheet(screen) { var s = $('.ph-scrim', screen); if (s) { s.remove(); if (lastFocus && lastFocus.isConnected) lastFocus.focus(); } }
+  function toggleTable(t) {
+    var plot = $('.dv-plot', t), tbl = $('.dv-table', t), on = tbl.hidden;
+    tbl.hidden = !on; plot.hidden = on; t.classList.toggle('is-table', on);
+  }
+  function openFull(screen, card) {
+    lastFocus = document.activeElement; hideTip();
+    var title = $('.dv-title', card).textContent, name = $('.dv-plot', card).getAttribute('data-chart');
+    var cols = card.querySelectorAll('.dv-table thead th').length;
+    var f = document.createElement('div'); f.className = 'ph-full'; f.setAttribute('role', 'dialog'); f.setAttribute('aria-modal', 'true'); f.setAttribute('aria-label', title);
+    f.innerHTML = '<div class="ph-fullhead"><button class="iconbtn sm ph-more" type="button" data-ph="more" aria-haspopup="dialog" aria-label="Actions for ' + esc(title) + '">' + ico('more') + '</button><span class="ph-vsep" aria-hidden="true"></span>' +
+      '<button class="iconbtn" type="button" data-ph="full-close" aria-label="Close full screen">' + ico('close') + '</button></div>' +
+      '<div class="ph-fullbody"><div><h4 class="ph-fulltitle">' + esc(title) + '</h4><p class="dv-sub">' + esc($('.dv-sub', card).textContent) + '</p></div>' +
+      '<div class="dv-plot" data-chart="' + name + '" aria-label="' + esc(title) + '"></div>' +
+      '<div class="dv-table ph-tablewrap' + (cols > 3 ? ' ph-pin' : '') + '" hidden>' + $('.dv-table', card).innerHTML + '</div>' +
+      '<p class="dv-foot">' + $('.dv-foot', card).innerHTML + '</p><p class="ph-hint">' + ico('hold') + 'Touch and hold to read exact values.</p></div>';
+    screen.appendChild(f); if (window.dvMount) window.dvMount(f); $('[data-ph="full-close"]', f).focus();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target, screen = t.closest && t.closest('.ph-screen'); if (!screen) return;
+    if (t.classList.contains('ph-scrim')) { closeSheet(screen); return; }
+    var it = t.closest('[data-ph-item]');
+    if (it) {
+      var s = it.closest('.ph-scrim'), target = s._target, opener = s._opener, v = it.getAttribute('data-ph-item');
+      closeSheet(screen);
+      if (v === 'table') toggleTable(target);
+      else if (v === 'copy') window.dvCopy(opener, $('.dv-table table', target));
+      else if (v === 'csv') window.dvToast('Downloads aren’t connected on this page.');
+      else if (v === 'full') openFull(screen, target);
+      return;
+    }
+    var b = t.closest('[data-ph]');
+    if (b) {
+      var a = b.getAttribute('data-ph');
+      if (a === 'more') {
+        var target2 = b.closest('.ph-full') || b.closest('[data-ph-card]'), isT = target2.classList.contains('is-table'), inFull = target2.classList.contains('ph-full');
+        var items = [['table', isT ? 'View as chart' : 'View as table', isT ? 'chart' : 'table'], ['copy', 'Copy data', 'copy'], ['csv', 'Download CSV', 'download']];
+        if (!inFull) items.push(['full', 'Open full screen', 'expand']);
+        sheet(screen, $('.dv-title, .ph-fulltitle', target2).textContent, items, target2, b);
+      } else if (a === 'full-close') { var f = b.closest('.ph-full'); f.remove(); hideTip(); if (lastFocus && lastFocus.isConnected) lastFocus.focus(); }
+      else if (a === 'csv-all') window.dvToast('Downloads aren’t connected on this page.');
+      else if (a === 'close') window.dvToast('In aiRA this goes back to the chat.');
+      return;
+    }
+    var card = t.closest('[data-ph-card]');
+    if (card && !card.classList.contains('is-table')) openFull(screen, card);
+  });
+  document.addEventListener('keydown', function (e) {
+    var screen = e.target.closest && e.target.closest('.ph-screen'); if (!screen) return;
+    if (e.key === 'Escape') { if ($('.ph-scrim', screen)) closeSheet(screen); else { var f = $('.ph-full', screen); if (f) { f.remove(); if (lastFocus) lastFocus.focus(); } } }
+    var card = e.target.matches && e.target.matches('[data-ph-card]') ? e.target : null;
+    if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openFull(screen, card); }
   });
 })();
 
