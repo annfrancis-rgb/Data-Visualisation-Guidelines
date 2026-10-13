@@ -18,7 +18,7 @@
    Two-tier semantic token architecture: primitive palette + semantic light/dark, plus type, spacing, radius/elevation/motion and v3 additions. Built on Roboto, 4px base grid, WCAG AA targets in light and dark. Edit values here, then run: node scripts/generate.js
    ═══════════════════════════════════════════════════════════════ */
 
-:root { color-scheme: light dark; }
+:root { color-scheme: light; }
 
 /* 1 · PRIMITIVE PALETTE */
 :root {
@@ -2687,7 +2687,7 @@ var C = (function () {
   }
   function rerenderAll() { mounted.forEach(function (m) { m.force = true; render(m); }); }
   new MutationObserver(rerenderAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', rerenderAll); }
+  if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: light;)'); if (mq.addEventListener) mq.addEventListener('change', rerenderAll); }
   window.addEventListener('resize', function () { mounted.forEach(render); });
 
   // tooltip + keyboard
